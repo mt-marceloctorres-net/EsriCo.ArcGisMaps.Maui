@@ -6,7 +6,7 @@ using Esri.ArcGISRuntime.Maui;
 
 using Prism.Behaviors;
 
-namespace EsriCo.ArcGISRuntime.Xamarin.Forms.Behaviors
+namespace EsriCo.ArcGisMaps.Maui.Behaviors
 {
   /// <summary>
   /// 
