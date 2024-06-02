@@ -309,10 +309,7 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// 
     /// </summary>
     /// <returns></returns>
-    public async Task DeleteReplicaAsync()
-    {
-      await DeleteReplicaFolderAsync();
-    }
+    public async Task DeleteReplicaAsync() => await DeleteReplicaFolderAsync();
 
     /// <summary>
     /// 

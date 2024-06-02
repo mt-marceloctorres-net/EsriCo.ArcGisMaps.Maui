@@ -1,12 +1,6 @@
-﻿using System;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 using Newtonsoft.Json;
-
-using Prism.Mvvm;
 
 namespace EsriCo.ArcGisMaps.Maui.Services
 {
