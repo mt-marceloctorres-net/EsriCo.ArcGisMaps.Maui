@@ -12,7 +12,7 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// <summary>
     /// 
     /// </summary>
-    string AppFolderName { get; set; }
+    string? AppFolderName { get; set; }
 
     /// <summary>
     /// 
@@ -27,12 +27,12 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// <summary>
     /// 
     /// </summary>
-    MobileMapPackage MobileMapPackage { get; set; }
+    MobileMapPackage? MobileMapPackage { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    string ReplicaFolderName { get; set; }
+    string? ReplicaFolderName { get; set; }
 
     /// <summary>
     /// 
@@ -45,7 +45,7 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// </summary>
     /// <param name="map"></param>
     /// <returns></returns>
-    Task<string> DeleteReplicaAsync(Map map);
+    Task<string?> DeleteReplicaAsync(Map map);
 
     /// <summary>
     /// 
@@ -61,19 +61,19 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// <param name="jobHandler"></param>
     /// <param name="progressHandler"></param>
     /// <returns></returns>
-    Task<DownloadReplicaResult> DownloadReplicaAsync(Map map, Viewpoint viewpoint, EventHandler<JobChangedEventArgs> jobHandler, EventHandler<ProgressChangedEventArgs> progressHandler);
+    Task<DownloadReplicaResult?> DownloadReplicaAsync(Map map, Viewpoint viewpoint, EventHandler<JobChangedEventArgs> jobHandler, EventHandler<ProgressChangedEventArgs> progressHandler);
 
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
-    Task<Map> GetReplicaMapAsync();
+    Task<Map?> GetReplicaMapAsync();
 
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
-    bool ReplicaExist();
+    bool? ReplicaExist();
 
     /// <summary>
     /// 
@@ -82,7 +82,7 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// <param name="jobHandler"></param>
     /// <param name="progressHandler"></param>
     /// <returns></returns>
-    Task<SynchronizeReplicaResult> SynchronizeReplicaAsync(Map map, EventHandler<JobChangedEventArgs> jobHandler, EventHandler<ProgressChangedEventArgs> progressHandler);
+    Task<SynchronizeReplicaResult?> SynchronizeReplicaAsync(Map map, EventHandler<JobChangedEventArgs> jobHandler, EventHandler<ProgressChangedEventArgs> progressHandler);
 
     /// <summary>
     /// 
@@ -90,6 +90,6 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// <param name="map"></param>
     /// <param name="viewpoint"></param>
     /// <returns></returns>
-    Task<ValidateReplicaResult> ValidateReplicaAsync(Map map, Viewpoint viewpoint);
+    Task<ValidateReplicaResult?> ValidateReplicaAsync(Map map, Viewpoint viewpoint);
   }
 }

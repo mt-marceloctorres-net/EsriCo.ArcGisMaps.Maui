@@ -5,7 +5,6 @@ using Esri.ArcGISRuntime;
 using Esri.ArcGISRuntime.Data;
 using Esri.ArcGISRuntime.Http;
 using Esri.ArcGISRuntime.Mapping;
-using Esri.ArcGISRuntime.Tasks;
 using Esri.ArcGISRuntime.Tasks.Offline;
 
 using Map = Esri.ArcGISRuntime.Mapping.Map;
@@ -59,43 +58,51 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// <param name="map"></param>
     /// <param name="viewpoint"></param>
     /// <returns></returns>
-    public async Task<ValidateReplicaResult> ValidateReplicaAsync(Map map, Viewpoint viewpoint)
+    public async Task<ValidateReplicaResult?> ValidateReplicaAsync(Map map, Viewpoint viewpoint)
     {
-      var firstLayer = map.Basemap.BaseLayers.FirstOrDefault();
-      var basemapUrl = string.Empty;
-
-      if(firstLayer is ArcGISTiledLayer)
+      if(map.Basemap != null)
       {
-        var baseLayer = firstLayer as ArcGISTiledLayer;
-        basemapUrl = baseLayer.Source.AbsoluteUri;
-      }
-      if(!string.IsNullOrEmpty(basemapUrl))
-      {
-        var newBasemapUrl = basemapUrl.Contains("services.arcgisonline") ?
-          basemapUrl.Replace("services.arcgisonline", "tiledbasemaps.arcgis") :
-          basemapUrl;
-        var task = await ExportTileCacheTask.CreateAsync(new Uri(newBasemapUrl));
+        var firstLayer = map.Basemap.BaseLayers.FirstOrDefault();
+        var basemapUrl = string.Empty;
 
-        var param = await task.CreateDefaultExportTileCacheParametersAsync(viewpoint.TargetGeometry, MinScale.Value, MaxScale.Value);
-        var job = task.EstimateTileCacheSize(param);
-
-        try
+        if(firstLayer is ArcGISTiledLayer)
         {
-          var result = await job.GetResultAsync();
-          return new ValidateReplicaResult
+          basemapUrl = firstLayer is ArcGISTiledLayer baseLayer && baseLayer.Source != null ? baseLayer.Source.AbsoluteUri : string.Empty;
+        }
+        if(!string.IsNullOrEmpty(basemapUrl))
+        {
+          var newBasemapUrl = basemapUrl.Contains("services.arcgisonline") ?
+            basemapUrl.Replace("services.arcgisonline", "tiledbasemaps.arcgis") :
+            basemapUrl;
+          var task = await ExportTileCacheTask.CreateAsync(new Uri(newBasemapUrl));
+
+          var minScale = MinScale ?? 0;
+          var maxScale = MaxScale ?? 0;
+          var param = await task.CreateDefaultExportTileCacheParametersAsync(viewpoint.TargetGeometry, minScale, maxScale);
+          var job = task.EstimateTileCacheSize(param);
+
+          if(task.ServiceInfo != null)
           {
-            Valid = result.TileCount < task.ServiceInfo.MaxExportTilesCount,
-            Tiles = (int)result.TileCount,
-            Size = result.FileSize
-          };
+            try
+            {
+              var result = await job.GetResultAsync();
+              return new ValidateReplicaResult
+              {
+                Valid = result.TileCount < task.ServiceInfo.MaxExportTilesCount,
+                Tiles = (int)result.TileCount,
+                Size = result.FileSize
+              };
+            }
+            catch(ArcGISRuntimeException ex)
+            {
+              Debug.WriteLine(ex.Message);
+              return new ValidateReplicaResult();
+            }
+          }
         }
-        catch(ArcGISRuntimeException ex)
-        {
-          Debug.WriteLine(ex.Message);
-          return new ValidateReplicaResult();
-        }
+        return new ValidateReplicaResult() { Valid = true };
       }
-      return new ValidateReplicaResult() { Valid = true };
+      return null;
     }
 
     /// <summary>
@@ -106,7 +113,7 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// <param name="jobHandler"></param>
     /// <param name="progressHandler"></param>
     /// <returns></returns>
-    public async Task<DownloadReplicaResult> DownloadReplicaAsync(Map map, Viewpoint viewpoint,
+    public async Task<DownloadReplicaResult?> DownloadReplicaAsync(Map map, Viewpoint viewpoint,
       EventHandler<JobChangedEventArgs> jobHandler, EventHandler<ProgressChangedEventArgs> progressHandler)
     {
       ValidateReplicaFolderPath();
@@ -116,12 +123,16 @@ namespace EsriCo.ArcGisMaps.Maui.Services
       var task = await OfflineMapTask.CreateAsync(map);
       var parameters = await task.CreateDefaultGenerateOfflineMapParametersAsync(areaOfInterest);
 
-      parameters.MinScale = MinScale.Value;
-      parameters.MaxScale = MaxScale.Value;
+      parameters.MinScale = MinScale != null ? MinScale.Value : parameters.MinScale;
+      parameters.MaxScale = MaxScale != null ? MaxScale.Value : parameters.MaxScale;
       parameters.AttachmentSyncDirection = AttachmentSyncDirection.Bidirectional;
       parameters.ReturnLayerAttachmentOption = ReturnLayerAttachmentOption.AllLayers;
       parameters.ReturnSchemaOnlyForEditableLayers = false;
-      parameters.ItemInfo.Title = $"{parameters.ItemInfo.Title} (Off-line)";
+
+      if(parameters.ItemInfo != null)
+      {
+        parameters.ItemInfo.Title = $"{parameters.ItemInfo.Title} (Off-line)";
+      }
 
       var errors = new List<DownloadReplicaErrorResult>();
       var capabilitiesResults = await task.GetOfflineMapCapabilitiesAsync(parameters);
@@ -164,8 +175,9 @@ namespace EsriCo.ArcGisMaps.Maui.Services
         var generateOfflineMapResults = await job.GetResultAsync();
         if(!generateOfflineMapResults.HasErrors)
         {
+          var title = generateOfflineMapResults.MobileMapPackage.Item != null ? generateOfflineMapResults.MobileMapPackage.Item.Title : string.Empty;
           var okMessage = $"{AppResources.DownloadReplicaOkMessageMap} " +
-            $"{generateOfflineMapResults.MobileMapPackage.Item.Title} " +
+            $"{title} " +
             $"{AppResources.DownloadReplicaOkMessageSaved}.";
           MobileMapPackage = generateOfflineMapResults.MobileMapPackage;
           return new DownloadReplicaResult
@@ -204,7 +216,7 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// <param name="progressHandler"></param>
     /// 
     /// <returns></returns>
-    public async Task<SynchronizeReplicaResult> SynchronizeReplicaAsync(Map map, EventHandler<JobChangedEventArgs> jobHandler,
+    public async Task<SynchronizeReplicaResult?> SynchronizeReplicaAsync(Map map, EventHandler<JobChangedEventArgs> jobHandler,
       EventHandler<ProgressChangedEventArgs> progressHandler)
     {
       var errors = new List<SyncReplicaErrorResult>();
@@ -248,7 +260,7 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// </summary>
     /// <param name="map"></param>
     /// <returns></returns>
-    public async Task<string> DeleteReplicaAsync(Map map)
+    public async Task<string?> DeleteReplicaAsync(Map map)
     {
       var sb = new StringBuilder();
       var geodatabases = GetGeodatabases(map);
@@ -256,26 +268,35 @@ namespace EsriCo.ArcGisMaps.Maui.Services
       {
         foreach(var gdb in geodatabases)
         {
-          var syncId = Guid.Empty;
-          try
+          if(gdb != null)
           {
-            syncId = gdb.SyncId;
+            var syncId = Guid.Empty;
+            try
+            {
+              syncId = gdb.SyncId;
 
-            var task = await GeodatabaseSyncTask.CreateAsync(gdb.Source);
-            await task.UnregisterGeodatabaseAsync(gdb);
-
-            gdb.Close();
-            _ = sb.Append($"{AppResources.DeleteReplicaMessageDeleted} {syncId}.");
-          }
-          catch(ArcGISWebException ex)
-          {
-            Debug.WriteLine(ex.Message);
-            _ = sb.Append($"{AppResources.DeleteReplicaMessageCantDelete} {syncId}.");
-          }
-          finally
-          {
-            gdb.Close();
-            _ = sb.Append($"{AppResources.DeleteReplicaMessageDone}.");
+              if(gdb.Source != null)
+              {
+                var task = await GeodatabaseSyncTask.CreateAsync(gdb.Source);
+                await task.UnregisterGeodatabaseAsync(gdb);
+                gdb.Close();
+                _ = sb.Append($"{AppResources.DeleteReplicaMessageDeleted} {syncId}.");
+              }
+              else
+              {
+                throw new ReplicaMangerException("ReplicaManager - DeleteReplicaAsync: Geodatabase source is null.");
+              }
+            }
+            catch(ArcGISWebException ex)
+            {
+              Debug.WriteLine(ex.Message);
+              _ = sb.Append($"{AppResources.DeleteReplicaMessageCantDelete} {syncId}.");
+            }
+            finally
+            {
+              gdb.Close();
+              _ = sb.Append($"{AppResources.DeleteReplicaMessageDone}.");
+            }
           }
         }
       }
@@ -336,7 +357,7 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// 
     /// </summary>
     /// <returns></returns>
-    public bool ReplicaExist()
+    public bool? ReplicaExist()
     {
       if(!string.IsNullOrEmpty(ReplicaFolderName))
       {
@@ -350,7 +371,7 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// 
     /// </summary>
     /// <returns></returns>
-    public async Task<Map> GetReplicaMapAsync()
+    public async Task<Map?> GetReplicaMapAsync()
     {
       var pathToOutputPackage = GetReplicaFullPath();
       MobileMapPackage = await MobileMapPackage.OpenAsync(pathToOutputPackage);
@@ -363,10 +384,7 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// 
     /// </summary>
     /// <returns></returns>
-    private string GetReplicaFullPath()
-    {
-      return Path.Combine(FileSystem.AppDataDirectory, ReplicaFolderName);
-    }
+    private string GetReplicaFullPath() => Path.Combine(FileSystem.AppDataDirectory, ReplicaFolderName ?? "Replicas");
 
     /// <summary>
     /// 
@@ -374,34 +392,37 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// <returns></returns>
     private void ValidateReplicaFolderPath()
     {
-      var blockedFolders = new List<string>();
-      var basePath = FileSystem.AppDataDirectory;
-      var folders = Directory.GetDirectories(basePath);
-      foreach(var f in folders.Where(f => f.Contains(AppFolderName)))
+      if(AppFolderName != null)
       {
-        try
+        var blockedFolders = new List<string>();
+        var basePath = FileSystem.AppDataDirectory;
+        var folders = Directory.GetDirectories(basePath);
+        foreach(var f in folders.Where(f => f.Contains(AppFolderName)))
         {
-          Directory.Delete(f, true);
+          try
+          {
+            Directory.Delete(f, true);
+          }
+          catch(Exception ex)
+          {
+            Debug.WriteLine(ex.Message);
+            blockedFolders.Add(f);
+          }
         }
-        catch(Exception ex)
-        {
-          Debug.WriteLine(ex.Message);
-          blockedFolders.Add(f);
-        }
-      }
 
-      if(blockedFolders.Count > 0)
-      {
-        var max = blockedFolders.Select(bf =>
+        if(blockedFolders.Count > 0)
         {
-          var sufix = bf.Replace(AppFolderName, string.Empty);
-          return int.TryParse(sufix, out var index) ? index : -1;
-        }).Max();
-        ReplicaFolderName = $"{AppFolderName}{max + 1}";
-      }
-      else
-      {
-        ReplicaFolderName = AppFolderName;
+          var max = blockedFolders.Select(bf =>
+          {
+            var sufix = bf.Replace(AppFolderName, string.Empty);
+            return int.TryParse(sufix, out var index) ? index : -1;
+          }).Max();
+          ReplicaFolderName = $"{AppFolderName}{max + 1}";
+        }
+        else
+        {
+          ReplicaFolderName = AppFolderName;
+        }
       }
     }
 
@@ -410,11 +431,16 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// </summary>
     /// <param name="map"></param>
     /// <returns></returns>
-    private static IEnumerable<Geodatabase> GetGeodatabases(Map map)
+    private static IEnumerable<Geodatabase?> GetGeodatabases(Map map)
     {
       var query = map.AllLayers
-        .Where(l => l is FeatureLayer && (l as FeatureLayer).FeatureTable is GeodatabaseFeatureTable)
-        .Select(l => ((l as FeatureLayer).FeatureTable as GeodatabaseFeatureTable).Geodatabase)
+        .Where(l => l is FeatureLayer featureLayer && featureLayer.FeatureTable is GeodatabaseFeatureTable)
+        .Select(l =>
+        {
+          var featureLayer = l as FeatureLayer;
+          var gdb = featureLayer?.FeatureTable as GeodatabaseFeatureTable;
+          return gdb?.Geodatabase;
+        })
         .Distinct();
       return query;
     }
