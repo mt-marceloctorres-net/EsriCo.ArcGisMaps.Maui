@@ -3,11 +3,11 @@ namespace EsriCo.ArcGisMaps.Maui
   /// <summary>
   /// 
   /// </summary>
-  public partial class ResourceDictionary
+  public partial class LibResources
   {
     /// <summary>
     /// 
     /// </summary>
-    public ResourceDictionary() => InitializeComponent();
+    public LibResources() => InitializeComponent();
   }
 }

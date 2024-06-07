@@ -101,7 +101,7 @@ namespace EsriCo.ArcGisMaps.Maui.Model
       try
       {
         Text = text;
-        if(MapView != null )
+        if(MapView != null)
         {
           MapView.GeometryEditor = GeometryEditor;
           GeometryEditor ??= new GeometryEditor();

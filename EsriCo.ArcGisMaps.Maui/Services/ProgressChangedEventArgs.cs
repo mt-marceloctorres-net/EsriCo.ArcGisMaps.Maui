@@ -16,5 +16,4 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// </summary>
     public int Progress { get; set; }
   }
-
 }

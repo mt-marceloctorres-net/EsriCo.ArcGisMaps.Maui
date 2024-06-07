@@ -26,8 +26,8 @@ namespace EsriCo.ArcGisMaps.Maui.UI
     private static void OnIndicatorColorPropertyChanged(BindableObject bindable, object oldValue, object newValue)
     {
       var newColor = (Color)newValue;
-      if(bindable is DrawingStatusView contentView) 
-      { 
+      if(bindable is DrawingStatusView contentView)
+      {
         contentView.IndicatorColor = newColor;
       }
     }
@@ -71,10 +71,7 @@ namespace EsriCo.ArcGisMaps.Maui.UI
     /// <param name="newValue"></param>
     private static void OnMapViewPropertyChanged(BindableObject bindable, object oldValue, object newValue)
     {
-      var contentView = bindable as DrawingStatusView;
-      var oldMapView = oldValue as MapView;
-      var newMapView = newValue as MapView;
-      if(contentView != null && oldMapView != null && newMapView != null)
+      if(bindable is DrawingStatusView contentView && oldValue is MapView oldMapView && newValue is MapView newMapView)
       {
         contentView.AddDrawStatusChangedHandler(oldMapView, newMapView);
       }
@@ -102,10 +99,7 @@ namespace EsriCo.ArcGisMaps.Maui.UI
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void MapViewDrawStatusChanged(object? sender, DrawStatusChangedEventArgs e)
-    {
-      IsVisible = e.Status == DrawStatus.InProgress;
-    }
+    private void MapViewDrawStatusChanged(object? sender, DrawStatusChangedEventArgs e) => IsVisible = e.Status == DrawStatus.InProgress;
 
     /// <summary>
     /// 

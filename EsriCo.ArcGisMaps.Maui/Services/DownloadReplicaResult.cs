@@ -27,5 +27,4 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// </summary>
     public DownloadReplicaResult() => ResultErrors = [];
   }
-
 }

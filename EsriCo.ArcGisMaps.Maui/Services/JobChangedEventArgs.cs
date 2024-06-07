@@ -23,5 +23,4 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// </summary>
     public IReadOnlyList<JobMessage>? Messages { get; set; }
   }
-
 }

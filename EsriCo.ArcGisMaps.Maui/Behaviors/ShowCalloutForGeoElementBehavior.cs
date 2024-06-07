@@ -4,11 +4,13 @@ using Esri.ArcGISRuntime.Maui;
 
 using Prism.Behaviors;
 
-namespace EsriCo.ArcGisMaps.Maui.Behaviors {
+namespace EsriCo.ArcGisMaps.Maui.Behaviors
+{
   /// <summary>
   /// 
   /// </summary>
-  public class ShowCalloutForGeoElementBehavior : BehaviorBase<MapView> {
+  public class ShowCalloutForGeoElementBehavior : BehaviorBase<MapView>
+  {
     /// <summary>
     /// 
     /// </summary>
@@ -18,7 +20,8 @@ namespace EsriCo.ArcGisMaps.Maui.Behaviors {
     /// <summary>
     /// 
     /// </summary>
-    public CalloutInfo CalloutInfo {
+    public CalloutInfo CalloutInfo
+    {
       get => (CalloutInfo)GetValue(CalloutInfoProperty);
       set => SetValue(CalloutInfoProperty, value);
     }
@@ -27,9 +30,11 @@ namespace EsriCo.ArcGisMaps.Maui.Behaviors {
     /// 
     /// </summary>
     /// <param name="propertyName"></param>
-    protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
+    protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
       base.OnPropertyChanged(propertyName);
-      if(propertyName == nameof(CalloutInfo)) {
+      if(propertyName == nameof(CalloutInfo))
+      {
         ShowCallout();
       }
     }
@@ -37,12 +42,15 @@ namespace EsriCo.ArcGisMaps.Maui.Behaviors {
     /// <summary>
     /// 
     /// </summary>
-    private void ShowCallout() {
-      if(CalloutInfo != null && CalloutInfo.Point != null && CalloutInfo.GeoElement != null && CalloutInfo.CalloutDefinition != null) {
+    private void ShowCallout()
+    {
+      if(CalloutInfo != null && CalloutInfo.Point != null && CalloutInfo.GeoElement != null && CalloutInfo.CalloutDefinition != null)
+      {
         var punto = AssociatedObject.LocationToScreen(CalloutInfo.Point);
         AssociatedObject.ShowCalloutForGeoElement(CalloutInfo.GeoElement, punto, CalloutInfo.CalloutDefinition);
       }
-      else {
+      else
+      {
         AssociatedObject.DismissCallout();
       }
     }

@@ -1,6 +1,6 @@
-﻿using Esri.ArcGISRuntime.Mapping;
-using Esri.ArcGISRuntime.Portal;
+﻿using Esri.ArcGISRuntime.Portal;
 using Esri.ArcGISRuntime.Security;
+
 using Map = Esri.ArcGISRuntime.Mapping.Map;
 
 namespace EsriCo.ArcGisMaps.Maui.Services

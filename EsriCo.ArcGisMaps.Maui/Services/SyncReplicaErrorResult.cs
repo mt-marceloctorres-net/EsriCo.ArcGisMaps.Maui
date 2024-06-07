@@ -26,5 +26,4 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// </summary>
     public string? Message { get; set; }
   }
-
 }

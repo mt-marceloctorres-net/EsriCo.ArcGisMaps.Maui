@@ -265,10 +265,10 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     {
       if(info != null && info.ServiceUri != null && User != null && Password != null && Domain != null)
       {
-        var credential =  info.AuthenticationType == AuthenticationType.NetworkCredential
+        var credential = info.AuthenticationType == AuthenticationType.NetworkCredential
           ? new ArcGISNetworkCredential(info.ServiceUri, new System.Net.NetworkCredential(User, Password, Domain))
           : await AddCredentialAsync();
-        if (credential != null)
+        if(credential != null)
         {
           return credential;
         }
@@ -397,7 +397,8 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     /// <returns></returns>
     public async Task<string> GetLicenseInfoJsonAsync()
     {
-      if (Portal != null) {
+      if(Portal != null)
+      {
         var licenseInfo = await Portal.GetLicenseInfoAsync();
         return licenseInfo.ToJson();
       }
@@ -425,7 +426,7 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     private void GetUserImageString()
     {
       var token = CancellationToken.None;
-      if (PortalUser != null)
+      if(PortalUser != null)
       {
         var task = PortalUser.GetThumbnailDataAsync(token);
         var s = task.Result ?? GetType().Assembly.GetStreamEmbeddedResource("ic_user");
@@ -441,6 +442,7 @@ namespace EsriCo.ArcGisMaps.Maui.Services
     {
       if(ServerRegisterUrl != null)
       {
+        TokenExpirationDateTime = null;
         var uri = new Uri(ServerRegisterUrl);
         var now = DateTime.Now;
 
@@ -453,7 +455,10 @@ namespace EsriCo.ArcGisMaps.Maui.Services
             TokenAuthenticationType = TokenAuthenticationType,
             TokenExpirationInterval = TokenValidDays != null ? TimeSpan.FromMinutes(TokenValidDays.Value * 24 * 60) : TimeSpan.MinValue,
           });
-        TokenExpirationDateTime = Credential.ExpirationDate == null ? null : Credential.ExpirationDate.Value;
+        if(Credential.ExpirationDate != null)
+        {
+          TokenExpirationDateTime = Credential.ExpirationDate.Value;
+        }
 
         var timeSpan = TokenExpirationDateTime != null ? TokenExpirationDateTime - now : TimeSpan.Zero;
         TokenValidDays = timeSpan.HasValue ? timeSpan.Value.TotalDays : 0;

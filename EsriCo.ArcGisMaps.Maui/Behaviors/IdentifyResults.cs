@@ -3,7 +3,8 @@
   /// <summary>
   /// 
   /// </summary>
-  public class IdentifyResults {
+  public class IdentifyResults
+  {
     /// <summary>
     /// 
     /// </summary>
@@ -17,7 +18,8 @@
     /// <summary>
     /// 
     /// </summary>
-    public IdentifyResults() {
+    public IdentifyResults()
+    {
       GraphicsResults = [];
       GeoElementResults = [];
     }

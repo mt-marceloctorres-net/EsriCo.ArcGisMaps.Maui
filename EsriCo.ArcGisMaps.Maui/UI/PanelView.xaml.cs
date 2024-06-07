@@ -527,7 +527,7 @@ namespace EsriCo.ArcGisMaps.Maui.UI
     public PanelView()
     {
       InitializeComponent();
-      
+
       CloseButtonImage = ImageSource.FromStream(() => typeof(PanelView).Assembly.GetStreamEmbeddedResource(@"ic_close"));
       EventAggregator.Current.GetEvent<PanelViewIsVisibleChangedEvent>().Subscribe(panelView =>
       {
