@@ -11,7 +11,7 @@
     <Setter Property="BorderColor"
             Value="{AppThemeBinding {StaticResource LightSecondaryColor},Light={StaticResource LightSecondaryColor}, Dark={StaticResource DarkSecondaryColor}}" />
   </Style>
-  <Style x:Key="PanelViewStyle"
+  <!--<Style x:Key="PanelViewStyle"
          TargetType="ui:PanelView">
     <Setter Property="TitleBackgroundColor"
             Value="{AppThemeBinding {StaticResource LightPrimaryColor},Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" />
@@ -25,7 +25,7 @@
             Value="{AppThemeBinding {StaticResource LightPrimaryColor},Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" />
     <Setter Property="StatusBorderColor"
             Value="{AppThemeBinding {StaticResource LightSecondaryColor},Light={StaticResource LightSecondaryColor}, Dark={StaticResource DarkSecondaryColor}}" />
-  </Style>
+  </Style>-->
   <Style x:Key="SmallLabel"
          TargetType="Label">
     <Setter Property="Font">

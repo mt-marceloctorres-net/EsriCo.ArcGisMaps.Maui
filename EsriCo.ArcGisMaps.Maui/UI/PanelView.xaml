@@ -19,7 +19,7 @@
   <ContentView.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <root:ResourceDictionary />
+        <root:LibResources />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </ContentView.Resources>

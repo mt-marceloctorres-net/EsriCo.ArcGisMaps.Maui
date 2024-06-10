@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Name="view"
+             x:Class="EsriCo.ArcGisMaps.Maui.UI.DrawToolBarView"
+             HorizontalOptions="Start"
+             VerticalOptions="Start">
+  <Grid
+    BackgroundColor="Transparent"
+    Margin="10">
+    <StackLayout
+      Orientation="{Binding Orientation, Source={x:Reference view}}"
+      BackgroundColor="Transparent"
+      Spacing="1">
+      <Button
+        Clicked="DrawPointToolClicked"
+        Style="{DynamicResource ToolButton}"
+        ImageSource="{Binding DrawPointToolImage, Source={x:Reference view}}" />
+      <Button
+        Clicked="DrawPolylineToolClicked"
+        Style="{DynamicResource ToolButton}"
+        ImageSource="{Binding DrawPolylineToolImage, Source={x:Reference view}}" />
+      <Button
+        Clicked="DrawFreehandLineToolClicked"
+        Style="{DynamicResource ToolButton}"
+        ImageSource="{Binding DrawFreehandLineToolImage, Source={x:Reference view}}" />
+      <Button
+        Clicked="DrawPolygonToolClicked"
+        Style="{DynamicResource ToolButton}"
+        ImageSource="{Binding DrawPolygonToolImage, Source={x:Reference view}}" />
+      <Button
+        Clicked="DrawRectangleToolClicked"
+        Style="{DynamicResource ToolButton}"
+        ImageSource="{Binding DrawRectangleToolImage, Source={x:Reference view}}" />
+      <Button
+        Clicked="DrawTextToolClicked"
+        Style="{DynamicResource ToolButton}"
+        ImageSource="{Binding DrawTextToolImage, Source={x:Reference view}}" />
+      <Button
+        Clicked="DrawEraseToolClicked"
+        Style="{DynamicResource ToolButton}"
+        ImageSource="{Binding DrawEraseToolImage, Source={x:Reference view}}" />
+      <Button
+        Clicked="DrawNoneToolClicked"
+        Style="{DynamicResource ToolButton}"
+        ImageSource="{Binding DrawNoneToolImage, Source={x:Reference view}}" />
+    </StackLayout>
+  </Grid>
+</ContentView>

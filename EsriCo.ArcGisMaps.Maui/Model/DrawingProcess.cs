@@ -1,24 +1,20 @@
-﻿using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Maui;
 using Esri.ArcGISRuntime.Symbology;
 using Esri.ArcGISRuntime.UI;
 using Esri.ArcGISRuntime.UI.Editing;
-using Symbology = Esri.ArcGISRuntime.Symbology;
-using Drawing = System.Drawing;
 
-using Prism.Mvvm;
+using Drawing = System.Drawing;
+using Symbology = Esri.ArcGISRuntime.Symbology;
 
 namespace EsriCo.ArcGisMaps.Maui.Model
 {
   /// <summary>
   /// 
   /// </summary>
-  internal class DrawingProcess : BindableBase
+  public class DrawingProcess : BindableBase
   {
     /// <summary>
     /// 
@@ -63,32 +59,32 @@ namespace EsriCo.ArcGisMaps.Maui.Model
     /// <summary>
     /// 
     /// </summary>
-    internal GraphicsOverlay? DrawGraphicsOverlay { get; set; }
+    public GraphicsOverlay? DrawGraphicsOverlay { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    internal Action<Geometry>? PointCreated { get; set; }
+    public Action<Geometry>? PointCreated { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    internal Action<Geometry>? MultiPointCreated { get; set; }
+    public Action<Geometry>? MultiPointCreated { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    internal Action<Geometry>? PolylineCreated { get; set; }
+    public Action<Geometry>? PolylineCreated { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    internal Action<Geometry>? FreehandLineCreated { get; set; }
+    public Action<Geometry>? FreehandLineCreated { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    internal Action<Geometry>? PolygonCreated { get; set; }
+    public Action<Geometry>? PolygonCreated { get; set; }
 
     /// <summary>
     /// 
@@ -96,7 +92,7 @@ namespace EsriCo.ArcGisMaps.Maui.Model
     /// <param name="mode"></param>
     /// <param name="text"></param>
     /// <returns></returns>
-    internal void StartDrawGeometry(GeometryType mode, string? text = null)
+    public void StartDrawGeometry(GeometryType mode, string? text = null)
     {
       try
       {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 using EsriCo.ArcGisMaps.Maui.Extensions;
 using EsriCo.ArcGisMaps.Maui.Model;
@@ -527,7 +526,6 @@ namespace EsriCo.ArcGisMaps.Maui.UI
     public PanelView()
     {
       InitializeComponent();
-
       CloseButtonImage = ImageSource.FromStream(() => typeof(PanelView).Assembly.GetStreamEmbeddedResource(@"ic_close"));
       EventAggregator.Current.GetEvent<PanelViewIsVisibleChangedEvent>().Subscribe(panelView =>
       {
@@ -538,7 +536,7 @@ namespace EsriCo.ArcGisMaps.Maui.UI
       });
       Closed += (sender, args) => EventAggregator.Current.GetEvent<PanelViewIsVisibleChangedEvent>().Publish(this);
 
-#if !DEBUG
+#if DEBUG
       Debug.WriteLine(ExternalPanelFrame.BackgroundColor);
       Debug.WriteLine(ExternalPanelFrame.BorderColor);
       Debug.WriteLine(PanelFrame.BackgroundColor);

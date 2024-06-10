@@ -1,6 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 
 using Esri.ArcGISRuntime.Symbology;
 
@@ -25,8 +23,8 @@ namespace EsriCo.ArcGisMaps.Maui.Converters
       {
         var symbol = symbol1;
         var task = GetImageAsync(symbol);
-        var awaiter = task.GetAwaiter();
-        return awaiter.GetResult();
+        var waiter = task.GetAwaiter();
+        return waiter.GetResult();
       }
       return value;
     }
