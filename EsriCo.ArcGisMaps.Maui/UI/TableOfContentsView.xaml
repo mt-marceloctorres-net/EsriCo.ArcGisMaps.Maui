@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ui:LayerListPanelView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                       xmlns:ui="clr-namespace:EsriCo.ArcGisMaps.Maui.UI"
+                       mc:Ignorable="d"
+                       xmlns:root="clr-namespace:EsriCo.ArcGisMaps.Maui"
+                       x:Class="EsriCo.ArcGisMaps.Maui.UI.TableOfContentsView"
+                       x:Name="layerview"
+                       TitleText="{x:Static root:AppResources.TOCPanelTitleText}">
+  <ui:LayerListPanelView.ItemTemplate>
+    <DataTemplate>
+      <ViewCell  IsEnabled="True">
+        <Grid Margin="5"
+              HorizontalOptions="FillAndExpand">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+          </Grid.ColumnDefinitions>
+          <Label  Grid.Column="0"
+                  Style="{DynamicResource NormalLabel}"
+                  Text="{Binding Layer.Name}"
+                  IsEnabled="{Binding ParentInfo.Layer.IsVisible}"
+                  VerticalOptions="Center" />
+          <Switch Grid.Column="1"
+                  IsToggled="{Binding Layer.IsVisible,Mode=TwoWay}"
+                  IsEnabled="{Binding ParentInfo.Layer.IsVisilbe}"
+                  HorizontalOptions="EndAndExpand"
+                  VerticalOptions="Center" />
+        </Grid>
+      </ViewCell>
+    </DataTemplate>
+  </ui:LayerListPanelView.ItemTemplate>
+  <ui:LayerListPanelView.GroupHeaderTemplate>
+    <DataTemplate>
+      <ViewCell IsEnabled="True">
+        <Grid Margin="5"
+              HorizontalOptions="FillAndExpand">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+          </Grid.ColumnDefinitions>
+          <Label Grid.Column="0"
+                 Text="{Binding GroupLayerInfo.Layer.Name}"
+                 Style="{DynamicResource BoldLabel}"
+                 VerticalOptions="Center" />
+          <Switch Grid.Column="1"
+                  IsToggled="{Binding GroupLayerInfo.Layer.IsVisible,Mode=TwoWay}"
+                  HorizontalOptions="EndAndExpand"
+                  VerticalOptions="Center" />
+        </Grid>
+      </ViewCell>
+    </DataTemplate>
+  </ui:LayerListPanelView.GroupHeaderTemplate>
+</ui:LayerListPanelView>

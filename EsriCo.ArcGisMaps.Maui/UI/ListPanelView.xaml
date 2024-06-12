@@ -8,8 +8,7 @@
               x:Class="EsriCo.ArcGisMaps.Maui.UI.ListPanelView"
               x:Name="panelview">
   <ui:PanelView.BodyContent>
-    <Grid BindingContext="{Binding ListBindingContext,Source={x:Reference panelview}}"
-          BindingContextChanged="ListView_BindingContextChanged">
+    <Grid BindingContext="{Binding ListBindingContext,Source={x:Reference panelview}}">
       <ListView Margin="5"
                 SeparatorVisibility="None"
                 HorizontalOptions="FillAndExpand"

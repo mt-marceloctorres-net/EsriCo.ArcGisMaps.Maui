@@ -1,43 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EsriCo.ArcGisMaps.Maui.LibResources">
-  <OnPlatform x:Key="SmallFont"
-              x:TypeArguments="Font">
-    <On Platform="iOS"
-        Value="Micro" />
-    <On Platform="Android"
-        Value="Micro" />
-    <On Platform="WinUI"
-        Value="12" />
-  </OnPlatform>
-  <OnPlatform x:Key="NormalFont"
-              x:TypeArguments="Font">
-    <On Platform="iOS"
-        Value="Micro" />
-    <On Platform="Android"
-        Value="Small" />
-    <On Platform="UWP"
-        Value="14" />
-  </OnPlatform>
-  <OnPlatform x:Key="BoldFont"
-              x:TypeArguments="Font">
-    <On Platform="iOS"
-        Value="Bold,Micro" />
-    <On Platform="Android"
-        Value="Bold,Small" />
-    <On Platform="UWP"
-        Value="Segoe UI Light,Bold,14" />
-  </OnPlatform>
-  <OnPlatform x:Key="TitleFont"
-              x:TypeArguments="Font">
-    <On Platform="iOS"
-        Value="Bold,Small" />
-    <On Platform="Android"
-        Value="Bold,Medium" />
-    <On Platform="UWP"
-        Value="Segoe UI Light,Bold,16" />
-  </OnPlatform>
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:ui="clr-namespace:EsriCo.ArcGisMaps.Maui.UI"
+                    x:Class="EsriCo.ArcGisMaps.Maui.LibResources">
   <Color x:Key="DarkGrayTransparent">
     <x:Arguments>
       <x:Byte>204</x:Byte>
@@ -56,7 +21,7 @@
     <Setter Property="BorderColor"
             Value="{AppThemeBinding {StaticResource LightSecondaryColor},Light={StaticResource LightSecondaryColor}, Dark={StaticResource DarkSecondaryColor}}" />
   </Style>
-  <!--<Style x:Key="PanelViewStyle"
+  <Style x:Key="PanelViewStyle"
          TargetType="ui:PanelView">
     <Setter Property="TitleBackgroundColor"
             Value="{AppThemeBinding {StaticResource LightPrimaryColor},Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" />
@@ -70,12 +35,19 @@
             Value="{AppThemeBinding {StaticResource LightPrimaryColor},Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" />
     <Setter Property="StatusBorderColor"
             Value="{AppThemeBinding {StaticResource LightSecondaryColor},Light={StaticResource LightSecondaryColor}, Dark={StaticResource DarkSecondaryColor}}" />
-  </Style>-->
+  </Style>
   <Style x:Key="SmallLabel"
          TargetType="Label">
     <Setter Property="FontSize">
       <Setter.Value>
-        <StaticResource Key="SmallFont" />
+        <OnPlatform x:TypeArguments="FontSizeConverter">
+          <On Platform="iOS"
+              Value="Micro" />
+          <On Platform="Android"
+              Value="Micro" />
+          <On Platform="WinUI"
+              Value="12" />
+        </OnPlatform>
       </Setter.Value>
     </Setter>
   </Style>
@@ -83,23 +55,48 @@
          TargetType="Label">
     <Setter Property="FontSize">
       <Setter.Value>
-        <StaticResource Key="NormalFont" />
+        <OnPlatform x:TypeArguments="FontSizeConverter">
+          <On Platform="iOS"
+            Value="Micro" />
+          <On Platform="Android"
+              Value="Small" />
+          <On Platform="WinUI"
+              Value="14" />
+        </OnPlatform>
       </Setter.Value>
     </Setter>
   </Style>
   <Style x:Key="BoldLabel"
          TargetType="Label">
-    <Setter Property="Font">
-      <Setter.Value>
-        <StaticResource Key="BoldFont" />
+    <Setter Property="FontAttributes"
+            Value="Bold" />
+    <Setter Property="FontSize">
+        <Setter.Value>
+        <OnPlatform x:TypeArguments="FontSizeConverter">
+          <On Platform="iOS"
+              Value="Micro" />
+          <On Platform="Android"
+              Value="Small" />
+          <On Platform="WinUI"
+              Value="14" />
+        </OnPlatform>
       </Setter.Value>
     </Setter>
   </Style>
   <Style x:Key="TitleLabel"
          TargetType="Label">
-    <Setter Property="Font">
+    <Setter Property="FontAttributes"
+            Value="Bold" />
+    <Setter Property="FontSize">
       <Setter.Value>
-        <StaticResource Key="TitleFont" />
+        <OnPlatform x:TypeArguments="FontSizeConverter">
+          <On Platform="iOS"
+              Value="Small" />
+          <On Platform="Android"
+              Value="Medium" />
+          <On Platform="WinUI"
+              Value="16" />
+        </OnPlatform>
       </Setter.Value>
     </Setter>
   </Style>

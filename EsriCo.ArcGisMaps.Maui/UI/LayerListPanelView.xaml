@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ui:ListPanelView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:ui="clr-namespace:EsriCo.ArcGisMaps.Maui.UI"
+                  mc:Ignorable="d"
+                  x:Class="EsriCo.ArcGisMaps.Maui.UI.LayerListPanelView"
+                  x:Name="listview"
+                  IsGroupingEnabled="True"
+                  IsStatusVisible="False"
+                  ItemsSource="{Binding LayerInfoList,Source={x:Reference listview}}"> 
+  <ui:ListPanelView.ItemTemplate>
+    <DataTemplate />
+  </ui:ListPanelView.ItemTemplate>
+  <ui:ListPanelView.GroupHeaderTemplate>
+    <DataTemplate />
+  </ui:ListPanelView.GroupHeaderTemplate>
+</ui:ListPanelView>

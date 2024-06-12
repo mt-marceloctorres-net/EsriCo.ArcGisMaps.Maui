@@ -131,19 +131,6 @@ namespace EsriCo.ArcGisMaps.Maui.UI
     /// <summary>
     /// 
     /// </summary>
-    public ListPanelView()
-    {
-      InitializeComponent();
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void ListView_BindingContextChanged(object sender, EventArgs e)
-    {
-      Console.WriteLine(sender);
-    }
+    public ListPanelView() => InitializeComponent();
   }
 }

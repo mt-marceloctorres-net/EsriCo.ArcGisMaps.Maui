@@ -359,7 +359,7 @@ namespace EsriCo.ArcGisMaps.Maui.UI
     /// <summary>
     /// 
     /// </summary>
-    public string TitleText
+    public string? TitleText
     {
       get => (string)GetValue(TitleTextProperty);
       set => SetValue(TitleTextProperty, value);
