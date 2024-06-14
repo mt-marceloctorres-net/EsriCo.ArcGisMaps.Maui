@@ -19,12 +19,12 @@ namespace EsriCo.ArcGisMaps.Maui.Behaviors
       set => SetProperty(ref _geoElement, value);
     }
 
-    private Layer? _layer;
+    private ILayerContent? _layer;
 
     /// <summary>
     /// 
     /// </summary>
-    public Layer? Layer
+    public ILayerContent? Layer
     {
       get => _layer;
       set => SetProperty(ref _layer, value);

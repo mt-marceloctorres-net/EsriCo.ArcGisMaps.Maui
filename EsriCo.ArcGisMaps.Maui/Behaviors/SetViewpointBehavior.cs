@@ -13,7 +13,8 @@ namespace EsriCo.ArcGisMaps.Maui.Behaviors
   /// <summary>
   /// 
   /// </summary>
-  public class SetViewpointBehavior : BehaviorBase<MapView> {
+  public class SetViewpointBehavior : BehaviorBase<MapView>
+  {
     /// <summary>
     /// 
     /// </summary>
@@ -26,7 +27,8 @@ namespace EsriCo.ArcGisMaps.Maui.Behaviors
     /// <summary>
     /// 
     /// </summary>
-    public Polygon? VisibleArea {
+    public Polygon? VisibleArea
+    {
       get => (Polygon)GetValue(VisibleAreaProperty);
       set => SetValue(VisibleAreaProperty, value);
     }
@@ -43,7 +45,8 @@ namespace EsriCo.ArcGisMaps.Maui.Behaviors
     /// <summary>
     /// 
     /// </summary>
-    public double MapScale {
+    public double MapScale
+    {
       get => (double)GetValue(MapScaleProperty);
       set => SetValue(MapScaleProperty, value);
     }
@@ -59,7 +62,8 @@ namespace EsriCo.ArcGisMaps.Maui.Behaviors
     /// <summary>
     /// 
     /// </summary>
-    public Viewpoint Viewpoint {
+    public Viewpoint Viewpoint
+    {
       get => (Viewpoint)GetValue(ViewpointProperty);
       set => SetValue(ViewpointProperty, value);
     }
@@ -68,9 +72,11 @@ namespace EsriCo.ArcGisMaps.Maui.Behaviors
     /// 
     /// </summary>
     /// <param name="propertyName"></param>
-    protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
+    protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
       base.OnPropertyChanged(propertyName);
-      if(propertyName == nameof(Viewpoint)) {
+      if(propertyName == nameof(Viewpoint))
+      {
         SetViewpoint(Viewpoint).Await();
       }
     }
@@ -79,11 +85,14 @@ namespace EsriCo.ArcGisMaps.Maui.Behaviors
     /// 
     /// </summary>
     /// <param name="viewpoint"></param>
-    private async Task SetViewpoint(Viewpoint viewpoint) {
-      if(viewpoint != null) {
+    private async Task SetViewpoint(Viewpoint viewpoint)
+    {
+      if(viewpoint != null)
+      {
         var currentViewpoint = AssociatedObject.GetCurrentViewpoint(ViewpointType.BoundingGeometry);
         var equals = currentViewpoint?.AreEquals(viewpoint);
-        if(equals.HasValue && !equals.Value) {
+        if(equals.HasValue && !equals.Value)
+        {
           _ = await AssociatedObject.SetViewpointAsync(viewpoint);
           VisibleArea = AssociatedObject.VisibleArea;
           MapScale = AssociatedObject.MapScale;

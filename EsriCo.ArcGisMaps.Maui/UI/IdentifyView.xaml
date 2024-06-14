@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ui:ListPanelView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:ui="clr-namespace:EsriCo.ArcGisMaps.Maui.UI"
+                  mc:Ignorable="d"
+                  x:Class="EsriCo.ArcGisMaps.Maui.UI.IdentifyView"
+                  x:Name="listview"
+                  IsFooterVisible="True"
+                  ItemsSource="{Binding PopupManager.DisplayedFields,Source={x:Reference listview}}">
+  <ui:ListPanelView.ItemTemplate>
+    <DataTemplate>
+      <ViewCell IsEnabled="True">
+        <Grid Margin="5"
+              HorizontalOptions="FillAndExpand">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+          </Grid.RowDefinitions>
+          <Label Text="{Binding Field.Label, StringFormat='\{0\} :'}"
+                 Style="{DynamicResource BoldLabel}"
+                 Margin="0"
+                 HorizontalOptions="FillAndExpand"
+                 VerticalOptions="EndAndExpand" />
+          <Label Text="{Binding FormattedValue}"
+                 Style="{DynamicResource NormalLabel}"
+                 Grid.Row="1"
+                 Margin="0"
+                 HorizontalOptions="FillAndExpand"
+                 VerticalOptions="StartAndExpand" />
+        </Grid>
+      </ViewCell>
+    </DataTemplate>
+  </ui:ListPanelView.ItemTemplate>
+  <ui:ListPanelView.FooterContent>
+    <StackLayout Grid.Row="1"
+                 Orientation="Horizontal"
+                 Spacing="5"
+                 Padding="5">
+      <Button x:Name="PreviousButton"
+              Text="Anterior"
+              Clicked="PreviousResulteClicked" />
+      <Button x:Name="NextButton"
+              Text="Siguiente"
+              Clicked="NextResultClicked" />
+    </StackLayout>
+  </ui:ListPanelView.FooterContent>
+</ui:ListPanelView>

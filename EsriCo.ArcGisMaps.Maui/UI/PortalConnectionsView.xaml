@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:root="clr-namespace:EsriCo.ArcGisMaps.Maui"
+             WidthRequest="500"
+             HeightRequest="800"
+             mc:Ignorable="d"
+             x:Class="EsriCo.ArcGisMaps.Maui.UI.PortalConnectionsView"
+             x:Name="view">
+  <ContentView.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <root:LibResources />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </ContentView.Resources>
+  <ContentView.Content>
+    <Frame Margin="0"
+           Padding="10"
+           BackgroundColor="{StaticResource DarkGrayTransparent}"
+           HorizontalOptions="FillAndExpand"
+           VerticalOptions="FillAndExpand">
+      <Frame Margin="0"
+             Padding="2"
+             HorizontalOptions="CenterAndExpand"
+             VerticalOptions="CenterAndExpand"
+             WidthRequest="{Binding Source={x:Reference view}, Path=WidthRequest}"
+             BorderColor="Black">
+        <Grid Margin="0"
+              Padding="0"
+              HorizontalOptions="Fill"
+              VerticalOptions="StartAndExpand"
+              BackgroundColor="White">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+          </Grid.RowDefinitions>
+          <Grid Margin="0"
+                Padding="5"
+                HorizontalOptions="Fill"
+                VerticalOptions="StartAndExpand"
+                BackgroundColor="White">
+            <Label Text="{x:Static root:AppResources.PortalsLabelText}"
+                   Style="{DynamicResource TitleFont}"
+                   FontAttributes="Bold"
+                   TextColor="Black" />
+          </Grid>
+          <StackLayout Grid.Row="1"
+                       Margin="5"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="StartAndExpand"
+                       BindableLayout.ItemsSource="{Binding PortalConnections,Source={x:Reference view}}">
+            <BindableLayout.ItemTemplate>
+              <DataTemplate>
+                <Grid>
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                  </Grid.RowDefinitions>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                  </Grid.ColumnDefinitions>
+                  <Image Grid.Column="0"
+                         Grid.Row="0"
+                         Grid.RowSpan="4"
+                         HorizontalOptions="CenterAndExpand"
+                         VerticalOptions="CenterAndExpand"
+                         HeightRequest="96"
+                         WidthRequest="96"
+                         Source="{Binding UserImage}" />
+                  <AbsoluteLayout Grid.Column="2"
+                                  Grid.Row="0"
+                                  BackgroundColor="LightGray"
+                                  Grid.RowSpan="4"
+                                  WidthRequest="96"
+                                  HeightRequest="96">
+                    <Image AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                           AbsoluteLayout.LayoutFlags="All"
+                           Source="{Binding PortalImage}" />
+                    <Image AbsoluteLayout.LayoutBounds="0.667, 0, 0.333, 0.333"
+                           AbsoluteLayout.LayoutFlags="PositionProportional"
+                           Source="{Binding ActiveImage,Source={x:Reference view}}" />
+                    <Image AbsoluteLayout.LayoutBounds="0.667, 0.667, 0.333, 0.333"
+                           AbsoluteLayout.LayoutFlags="PositionProportional"
+                           Source="{Binding LoginImage, Source={x:Reference view}}" />
+                  </AbsoluteLayout>
+                  <Label Grid.Row="0"
+                         Grid.Column="1"
+                         Text="{Binding UserName}"
+                         Style="{DynamicResource BoldLabel}"/>
+                  <Label Grid.Row="1"
+                         Grid.Column="1"
+                         Text="{Binding User}"
+                         Style="{DynamicResource NormalLabel}"/>
+                  <Label Grid.Row="2"
+                         Grid.Column="1"
+                         Text="{Binding OrganizationName}"
+                         Style="{DynamicResource NormalLabel}" />
+                  <Label Grid.Row="3"
+                         Grid.Column="1"
+                         Text="{Binding BaseUrl}"
+                         Style="{DynamicResource SmallLabel}" />
+                </Grid>
+              </DataTemplate>
+            </BindableLayout.ItemTemplate>
+          </StackLayout>
+          <StackLayout Grid.Row="2"
+                       Orientation="Horizontal"
+                       Margin="10"
+                       Padding="2">
+            <Button Text="{x:Static root:AppResources.AddPortalButtonText}"
+                    Clicked="AddPortalButtonClicked"
+                    Command="{Binding AddAccountCommand, Source={x:Reference view}}" />
+            <Button Text="{x:Static root:AppResources.CloseButtonText}"
+                    Clicked="CloseButtonClicked"  
+                    Command="{Binding CloseCommand, Source={x:Reference view}}" />
+          </StackLayout>
+        </Grid>
+      </Frame>
+    </Frame>
+  </ContentView.Content>
+</ContentView>

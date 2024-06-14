@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ui:PanelView xmlns="http: //schemas.microsoft.com/dotnet/2021/maui"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:ui="clr-namespace:EsriCo.ArcGisMaps.Maui.UI"
+              xmlns:root="clr-namespace:EsriCo.ArcGisMaps.Maui"
+              mc:Ignorable="d"
+              Padding="0"
+              Margin="0"
+              x:Class="EsriCo.ArcGisMaps.Maui.UI.ModalPanelView">
+  <ContentView.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <root:LibResources />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </ContentView.Resources>
+</ui:PanelView>

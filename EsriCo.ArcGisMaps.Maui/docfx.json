@@ -1,0 +1,73 @@
+{
+  "metadata": [
+    {
+      "dest": "../_docs/api",
+      "disableDefaultFilter": false,
+      "disableGitFeatures": false,
+      "properties": { "TargetFramework": "netstandard2.0" },
+      "src": [
+        {
+          "exclude": [ "**/bin/**", "**/obj/**" ],
+          "files": [
+            "**.csproj"
+          ],
+          "src": "../Esrico.ArcGisMaps.Maui"
+        }
+      ]
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "src": "../_docs/",
+        "files": [
+          "api/**.yml",
+          "api/index.md"
+        ]
+      },
+      {
+        "src": "../_docs/",
+        "files": [
+          "articles/**.md",
+          "articles/**/toc.yml",
+          "toc.yml",
+          "*.md"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "src": "../_docs/",
+        "files": [
+          "images/**"
+        ]
+      }
+    ],
+    "overwrite": [
+      {
+        "src": "../_docs/",
+        "files": [
+          "apidoc/**.md"
+        ],
+        "exclude": [
+          "obj/**",
+          "_site/**"
+        ]
+      }
+    ],
+    "dest": "../docs",
+    "globalMetadataFiles": [],
+    "fileMetadataFiles": [],
+    "template": [
+      "default",
+      "../_docs/template-override"
+    ],
+    "xrefService": [ "https://xref.docs.microsoft.com/query?uid={uid}" ],
+    "postProcessors": [],
+    "markdownEngineName": "markdig",
+    "noLangKeyword": false,
+    "keepFileLink": false,
+    "cleanupCacheHistory": false,
+    "disableGitFeatures": false
+  }
+}

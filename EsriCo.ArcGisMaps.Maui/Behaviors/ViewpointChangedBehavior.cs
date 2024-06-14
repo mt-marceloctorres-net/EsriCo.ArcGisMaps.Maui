@@ -6,12 +6,13 @@ using Esri.ArcGISRuntime.Maui;
 
 using Prism.Behaviors;
 
-namespace EsriCo.ArcGISRuntime.Xamarin.Forms.Behaviors
+namespace EsriCo.ArcGisMaps.Maui.Behaviors
 {
   /// <summary>
   /// 
   /// </summary>
-  public class ViewpointChangedBehavior : BehaviorBase<MapView> {
+  public class ViewpointChangedBehavior : BehaviorBase<MapView>
+  {
 
     /// <summary>
     /// 
@@ -25,7 +26,8 @@ namespace EsriCo.ArcGISRuntime.Xamarin.Forms.Behaviors
     /// <summary>
     /// 
     /// </summary>
-    public Polygon? VisibleArea {
+    public Polygon? VisibleArea
+    {
       get => (Polygon)GetValue(VisibleAreaProperty);
       set => SetValue(VisibleAreaProperty, value);
     }
@@ -42,7 +44,8 @@ namespace EsriCo.ArcGISRuntime.Xamarin.Forms.Behaviors
     /// <summary>
     /// 
     /// </summary>
-    public double UnitsPerPixel {
+    public double UnitsPerPixel
+    {
       get => (double)GetValue(UnitsPerPixelProperty);
       set => SetValue(UnitsPerPixelProperty, value);
     }
@@ -59,7 +62,8 @@ namespace EsriCo.ArcGISRuntime.Xamarin.Forms.Behaviors
     /// <summary>
     /// 
     /// </summary>
-    public double MapScale {
+    public double MapScale
+    {
       get => (double)GetValue(MapScaleProperty);
       set => SetValue(MapScaleProperty, value);
     }
@@ -75,7 +79,8 @@ namespace EsriCo.ArcGISRuntime.Xamarin.Forms.Behaviors
     /// <summary>
     /// 
     /// </summary>
-    public ICommand Command {
+    public ICommand Command
+    {
       get => (ICommand)GetValue(CommandProperty);
       set => SetValue(CommandProperty, value);
     }
@@ -84,7 +89,8 @@ namespace EsriCo.ArcGISRuntime.Xamarin.Forms.Behaviors
     /// 
     /// </summary>
     /// <param name="bindable"></param>
-    protected override void OnAttachedTo(MapView bindable) {
+    protected override void OnAttachedTo(MapView bindable)
+    {
       base.OnAttachedTo(bindable);
       bindable.ViewpointChanged += ViewpointChangedEventHandler;
       UnitsPerPixel = bindable.UnitsPerPixel;
@@ -94,7 +100,8 @@ namespace EsriCo.ArcGISRuntime.Xamarin.Forms.Behaviors
     /// 
     /// </summary>
     /// <param name="bindable"></param>
-    protected override void OnDetachingFrom(MapView bindable) {
+    protected override void OnDetachingFrom(MapView bindable)
+    {
       base.OnDetachingFrom(bindable);
       bindable.ViewpointChanged -= ViewpointChangedEventHandler;
     }
@@ -104,13 +111,16 @@ namespace EsriCo.ArcGISRuntime.Xamarin.Forms.Behaviors
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void ViewpointChangedEventHandler(object? sender, EventArgs e) {
+    private void ViewpointChangedEventHandler(object? sender, EventArgs e)
+    {
       MapScale = AssociatedObject.MapScale;
       VisibleArea = AssociatedObject.VisibleArea;
 
-      if(Command != null && AssociatedObject != null) {
+      if(Command != null && AssociatedObject != null)
+      {
         var currentViewpoint = AssociatedObject.GetCurrentViewpoint(ViewpointType.BoundingGeometry);
-        if(Command.CanExecute(currentViewpoint)) {
+        if(Command.CanExecute(currentViewpoint))
+        {
           Command.Execute(currentViewpoint);
         }
       }
