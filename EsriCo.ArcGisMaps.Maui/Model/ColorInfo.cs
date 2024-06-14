@@ -14,6 +14,6 @@ namespace EsriCo.ArcGisMaps.Maui.Model
     /// <summary>
     /// 
     /// </summary>
-    public Drawing.Color? Color { get; set; }
+    public Drawing.Color Color { get; set; }
   }
 }
