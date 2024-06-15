@@ -4,7 +4,7 @@
       "dest": "../_docs/api",
       "disableDefaultFilter": false,
       "disableGitFeatures": false,
-      "properties": { "TargetFramework": "netstandard2.0" },
+      "properties": { "TargetFramework": "net8.0" },
       "src": [
         {
           "exclude": [ "**/bin/**", "**/obj/**" ],
