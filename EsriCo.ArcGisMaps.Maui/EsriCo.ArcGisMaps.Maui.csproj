@@ -21,53 +21,53 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
-	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
-	  <ApplicationVersion>1</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.0.1</ApplicationDisplayVersion>
+	  <ApplicationVersion>2</ApplicationVersion>
 	  <ApplicationId>co.esri.argis.maps.maui</ApplicationId>
 	  <AndroidKeyStore>False</AndroidKeyStore>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
-	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
-	  <ApplicationVersion>1</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.0.1</ApplicationDisplayVersion>
+	  <ApplicationVersion>2</ApplicationVersion>
 	  <ApplicationId>co.esri.argis.maps.maui</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-maccatalyst|AnyCPU'">
-	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
-	  <ApplicationVersion>1</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.0.1</ApplicationDisplayVersion>
+	  <ApplicationVersion>2</ApplicationVersion>
 	  <ApplicationId>co.esri.argis.maps.maui</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
-	  <ApplicationVersion>1</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.0.1</ApplicationDisplayVersion>
+	  <ApplicationVersion>2</ApplicationVersion>
 	  <ApplicationId>co.esri.argis.maps.maui</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
-	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
-	  <ApplicationVersion>1</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.0.1</ApplicationDisplayVersion>
+	  <ApplicationVersion>2</ApplicationVersion>
 	  <ApplicationId>co.esri.argis.maps.maui</ApplicationId>
 	  <AndroidPackageFormat>apk</AndroidPackageFormat>
 	  <AndroidKeyStore>False</AndroidKeyStore>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
-	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
-	  <ApplicationVersion>1</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.0.1</ApplicationDisplayVersion>
+	  <ApplicationVersion>2</ApplicationVersion>
 	  <ApplicationId>co.esri.argis.maps.maui</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-maccatalyst|AnyCPU'">
-	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
-	  <ApplicationVersion>1</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.0.1</ApplicationDisplayVersion>
+	  <ApplicationVersion>2</ApplicationVersion>
 	  <ApplicationId>co.esri.argis.maps.maui</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
-	  <ApplicationVersion>1</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.0.1</ApplicationDisplayVersion>
+	  <ApplicationVersion>2</ApplicationVersion>
 	  <ApplicationId>co.esri.argis.maps.maui</ApplicationId>
 	</PropertyGroup>
 
@@ -78,6 +78,7 @@
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
 	  <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 	  <IncludeSymbols>False</IncludeSymbols>
+	  <Version>1.0.0.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
