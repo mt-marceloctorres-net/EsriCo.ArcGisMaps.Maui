@@ -30,6 +30,7 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
 	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
 	  <ApplicationVersion>1</ApplicationVersion>
+	  <ApplicationId>co.esri.argis.maps.maui</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-maccatalyst|AnyCPU'">
@@ -55,6 +56,7 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
 	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
 	  <ApplicationVersion>1</ApplicationVersion>
+	  <ApplicationId>co.esri.argis.maps.maui</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-maccatalyst|AnyCPU'">
@@ -71,6 +73,11 @@
 
 	<PropertyGroup>
 	  <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+	  <AssemblyVersion>1.0.0.1</AssemblyVersion>
+	  <FileVersion>1.0.0.1</FileVersion>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	  <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+	  <IncludeSymbols>False</IncludeSymbols>
 	</PropertyGroup>
 
 	<ItemGroup>
