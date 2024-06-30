@@ -7,12 +7,10 @@
              mc:Ignorable="d"
              x:Class="EsriCo.ArcGisMaps.Maui.UI.PanelView"
              x:Name="view"
-             Margin="10"
-             Style="{StaticResource Key=PanelViewStyle}"
+             Margin="0"
+             Style="{DynamicResource PanelViewStyle}"
              HorizontalOptions="CenterAndExpand"
-             VerticalOptions="CenterAndExpand"
-             MinimumWidthRequest="300"
-             WidthRequest="350">
+             VerticalOptions="CenterAndExpand">
   <ContentView.GestureRecognizers>
     <PanGestureRecognizer PanUpdated="OnPanUpdated" />
   </ContentView.GestureRecognizers>
@@ -24,120 +22,130 @@
     </ResourceDictionary>
   </ContentView.Resources>
   <ContentView.Content>
-    <Frame x:Name="ExternalPanelFrame"
-           Padding="{Binding BorderThickness, Source={x:Reference view}}"
-           BackgroundColor="{AppThemeBinding {StaticResource LightSecondaryColor},Light={StaticResource LightSecondaryColor},Dark={StaticResource DarkSecondaryColor}}"
+    <!--<Frame x:Name="ModalFrame"
+           Margin="0"
+           Padding="0"
+           IsVisible="True"
            CornerRadius="0"
-           HasShadow="True">
-      <Frame x:Name="PanelFrame"
+           HorizontalOptions="FillAndExpand"
+           VerticalOptions="FillAndExpand"
+           BackgroundColor="{StaticResource DarkGrayTransparent}"
+           HasShadow="False">-->
+      <Frame x:Name="ExternalPanelFrame"
              Margin="0"
              Padding="0"
              CornerRadius="0"
-             BorderColor="Transparent"
-             BackgroundColor="Transparent"
-             HasShadow="False">
-        <Grid Margin="0"
-              ColumnSpacing="0"
-              RowSpacing="0">
-          <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="auto" />
-          </Grid.RowDefinitions>
-          <Frame x:Name="TitleBarFrame"
-                 Margin="1"
-                 Padding="0"
-                 HorizontalOptions="FillAndExpand"
-                 VerticalOptions="FillAndExpand"
-                 BorderColor="{Binding TitleBorderColor,Source={x:Reference view}}"
-                 BackgroundColor="{Binding TitleBackgroundColor,Source={x:Reference view}}"
-                 IsVisible="{Binding IsTitleVisible,Source={x:Reference view}}"
-                 HasShadow="False"
-                 CornerRadius="0">
-            <Grid Margin="5"
-                  ColumnSpacing="1"
-                  HorizontalOptions="FillAndExpand">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="auto" />
-              </Grid.ColumnDefinitions>
-              <Label x:Name="TitleBarLabel"
-                     Margin="0"
-                     Style="{DynamicResource TitleLabel}"
-                     Text="{Binding TitleText, Source={x:Reference view}}"
-                     TextColor="{Binding TitleTextColor,Source={x:Reference view}}"
-                     HorizontalTextAlignment="{Binding TitleHorizontalTextAlignment,Source={x:Reference view}}"
-                     HorizontalOptions="FillAndExpand"
-                     VerticalOptions="CenterAndExpand"
-                     VerticalTextAlignment="Center" />
-              <Button Grid.Column="1"
-                      Style="{DynamicResource TitleBarToolButton}"
-                      ImageSource="{Binding CloseButtonImage,Source={x:Reference view}}"
-                      Clicked="OnCloseButtonClicked" />
-            </Grid>
-          </Frame>
-          <Frame x:Name="BodyFrame"
-                 Grid.Row="1"
-                 CornerRadius="0"
-                 Padding="0"
-                 Margin="1"
-                 BorderColor="{Binding BodyBorderColor,Source={x:Reference view}}"
-                 BackgroundColor="{Binding BodyBackgroundColor,Source={x:Reference view}}"
-                 HorizontalOptions="FillAndExpand"
-                 VerticalOptions="FillAndExpand">
-            <Grid RowSpacing="0">
-              <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="auto" />
-              </Grid.RowDefinitions>
-              <ContentView x:Name="HeaderContentView"
-                           IsVisible="{Binding IsHeaderVisible,Source={x:Reference view}}"
-                           Margin="0"
-                           HorizontalOptions="FillAndExpand"
-                           VerticalOptions="Start" />
-              <ContentView x:Name="BodyContentView"
-                           Grid.Row="1"
-                           Margin="0"
-                           HorizontalOptions="FillAndExpand"
-                           VerticalOptions="FillAndExpand" />
-              <ContentView x:Name="FooterContentView"
-                           IsVisible="{Binding IsFooterVisible,Source={x:Reference view}}"
-                           Grid.Row="2"
-                           Margin="0"
-                           HorizontalOptions="FillAndExpand"
-                           VerticalOptions="End" />
-            </Grid>
-          </Frame>
-          <Frame x:Name="StatusBarFrame"
-                 Grid.Row="2"
-                 Margin="1"
-                 Padding="0"
-                 BorderColor="{Binding StatusBorderColor,Source={x:Reference view}}"
-                 BackgroundColor="{Binding StatusBackgroundColor,Source={x:Reference view}}"
-                 IsVisible="{Binding IsStatusVisible,Source={x:Reference view}}"
-                 HorizontalOptions="FillAndExpand"
-                 VerticalOptions="FillAndExpand"
-                 HasShadow="False"
-                 CornerRadius="0">
-            <StackLayout Orientation="Horizontal"
-                         Margin="5"
-                         Spacing="2"
-                         HorizontalOptions="FillAndExpand">
-              <Label Margin="0"
-                     Text="" />
-              <Label Margin="0"
-                     Style="{DynamicResource NormalLabel}"
-                     Text="{Binding StatusText,Source={x:Reference view}} "
-                     TextColor="{Binding StatusTextColor,Source={x:Reference view}}"
-                     HorizontalOptions="StartAndExpand"
-                     VerticalOptions="CenterAndExpand"
-                     HorizontalTextAlignment="Start"
-                     VerticalTextAlignment="Center" />
-            </StackLayout>
-          </Frame>
-        </Grid>
+             BackgroundColor="{AppThemeBinding Light={StaticResource FrameBackground}, Dark={StaticResource DarkFrameBackground}}"
+             HasShadow="True">
+        <Frame x:Name="PanelFrame"
+               Margin="0"
+               Padding="0"
+               CornerRadius="0"
+               HasShadow="False">
+          <Grid Margin="0"
+                ColumnSpacing="0"
+                RowSpacing="0">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="auto" />
+              <RowDefinition Height="*" />
+              <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Frame x:Name="TitleBarFrame"
+                   Margin="0"
+                   CornerRadius="0"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"
+                   HasShadow="False"
+                   Padding="{Binding BorderThickness, Source={x:Reference view}}"
+                   BorderColor="{Binding TitleBorderColor,Source={x:Reference view}}"
+                   BackgroundColor="{Binding TitleBackgroundColor,Source={x:Reference view}}"
+                   IsVisible="{Binding IsTitleVisible,Source={x:Reference view}}">
+              <Grid Margin="2"
+                    ColumnSpacing="1"
+                    HorizontalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Label x:Name="TitleBarLabel"
+                       Margin="0"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="CenterAndExpand"
+                       VerticalTextAlignment="Center"
+                       Style="{DynamicResource TitleLabel}"
+                       Text="{Binding TitleText, Source={x:Reference view}}"
+                       TextColor="{Binding TitleTextColor,Source={x:Reference view}}"
+                       HorizontalTextAlignment="{Binding TitleHorizontalTextAlignment,Source={x:Reference view}}" />
+                <Button Grid.Column="1"
+                        Style="{DynamicResource TitleBarToolButton}"
+                        ImageSource="{Binding CloseButtonImage,Source={x:Reference view}}"
+                        Clicked="OnCloseButtonClicked" />
+              </Grid>
+            </Frame>
+            <Frame x:Name="BodyFrame"
+                   Grid.Row="1"
+                   Margin="0"
+                   CornerRadius="0"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"
+                   HasShadow="False"
+                   Padding="{Binding BorderThickness, Source={x:Reference view}}"
+                   BorderColor="{Binding BodyBorderColor,Source={x:Reference view}}"
+                   BackgroundColor="{Binding BodyBackgroundColor,Source={x:Reference view}}">
+              <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="auto" />
+                  <RowDefinition Height="*" />
+                  <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <ContentView x:Name="HeaderContentView"
+                             IsVisible="{Binding IsHeaderVisible,Source={x:Reference view}}"
+                             Margin="0"
+                             HorizontalOptions="FillAndExpand"
+                             VerticalOptions="Start" />
+                <ContentView x:Name="BodyContentView"
+                             Grid.Row="1"
+                             Margin="0"
+                             HorizontalOptions="FillAndExpand"
+                             VerticalOptions="FillAndExpand" />
+                <ContentView x:Name="FooterContentView"
+                             IsVisible="{Binding IsFooterVisible,Source={x:Reference view}}"
+                             Grid.Row="2"
+                             Margin="0"
+                             HorizontalOptions="FillAndExpand"
+                             VerticalOptions="End" />
+              </Grid>
+            </Frame>
+            <Frame x:Name="StatusBarFrame"
+                   Grid.Row="2"
+                   Margin="0"
+                   CornerRadius="0"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"
+                   HasShadow="False"
+                   Padding="{Binding BorderThickness, Source={x:Reference view}}"
+                   BorderColor="{Binding StatusBorderColor,Source={x:Reference view}}"
+                   BackgroundColor="{Binding StatusBackgroundColor,Source={x:Reference view}}"
+                   IsVisible="{Binding IsStatusVisible,Source={x:Reference view}}">
+              <StackLayout Orientation="Horizontal"
+                           Margin="2"
+                           Spacing="2"
+                           HorizontalOptions="FillAndExpand">
+                <Label Margin="0"
+                       Text="" />
+                <Label Margin="0"
+                       Style="{DynamicResource NormalLabel}"
+                       Text="{Binding StatusText,Source={x:Reference view}} "
+                       TextColor="{Binding StatusTextColor,Source={x:Reference view}}"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalTextAlignment="Start"
+                       VerticalTextAlignment="Center" />
+              </StackLayout>
+            </Frame>
+          </Grid>
+        </Frame>
       </Frame>
-    </Frame>
+    <!--</Frame>-->
   </ContentView.Content>
 </ContentView>

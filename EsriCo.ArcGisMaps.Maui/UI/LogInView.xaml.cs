@@ -6,7 +6,7 @@ namespace EsriCo.ArcGisMaps.Maui.UI
   /// 
   /// </summary>
   [XamlCompilation(XamlCompilationOptions.Compile)]
-  public partial class LogInView : ContentView
+  public partial class LogInView : ModalPanelView
   {
     /// <summary>
     /// 
