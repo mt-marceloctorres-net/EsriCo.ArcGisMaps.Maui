@@ -20,6 +20,8 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackAsTool>False</PackAsTool>
 		<Platforms>AnyCPU;x64</Platforms>
+		<AssemblyVersion>1.0.0.1</AssemblyVersion>
+		<FileVersion>1.0.0.1</FileVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
