@@ -1,66 +1,48 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:root="clr-namespace:EsriCo.ArcGisMaps.Maui"
-             WidthRequest="500"
-             MinimumWidthRequest="300"
-             mc:Ignorable="d"
-             x:Class="EsriCo.ArcGisMaps.Maui.UI.LogInView"
-             x:Name="view">
-  <ContentView.Resources>
+<ui:ModalPanelView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:root="clr-namespace:EsriCo.ArcGisMaps.Maui"
+                   xmlns:ui="clr-namespace:EsriCo.ArcGisMaps.Maui.UI"
+                   mc:Ignorable="d"
+                   x:Class="EsriCo.ArcGisMaps.Maui.UI.LogInView"
+                   IsStatusVisible="False"
+                   IsFooterVisible="True"
+                   TitleText="{x:Static root:AppResources.LoginLabelText}"
+                   WidthRequest="250"
+                   MinimumWidthRequest="300">
+  <ui:ModalPanelView.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
         <root:LibResources />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
-  </ContentView.Resources>
-  <ContentView.Content>
-    <Frame Margin="0"
-           Padding="10"
-           BackgroundColor="{StaticResource DarkGrayTransparent}"
-           HorizontalOptions="FillAndExpand"
-           VerticalOptions="FillAndExpand">
-      <Frame Margin="0"
-             Padding="2"
-             HorizontalOptions="CenterAndExpand"
-             VerticalOptions="CenterAndExpand"
-             WidthRequest="{Binding Source={x:Reference view}, Path=WidthRequest}"
-             BorderColor="Black">
+  </ui:ModalPanelView.Resources>
+  <ui:ModalPanelView.BodyContent>
         <Grid Margin="0"
               Padding="0"
-              HorizontalOptions="Fill"
-              VerticalOptions="StartAndExpand"
-              BackgroundColor="White">
+              HorizontalOptions="FillAndExpand"
+              VerticalOptions="StartAndExpand">
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
           </Grid.RowDefinitions>
-          <Grid Margin="0"
-                Padding="5"
-                HorizontalOptions="Fill"
-                VerticalOptions="StartAndExpand"
-                BackgroundColor="White">
-            <Label Text="{x:Static root:AppResources.LoginLabelText}"
-                   FontAttributes="Bold"
-                   TextColor="Black" />
-          </Grid>
           <StackLayout Orientation="Vertical"
                        Margin="10"
                        Padding="2"
-                       Grid.Row="1">
+                       Grid.Row="0">
             <Label Text="{x:Static root:AppResources.UsernameLabelText}" />
             <Entry Text="{Binding Username, Source={x:Reference view}}" />
             <Label Text="{x:Static root:AppResources.PasswordLabelText}" />
             <Entry IsPassword="{Binding IsPasswordHidden, Source={x:Reference view}}"
                    Text="{Binding Password, Source={x:Reference view}}" />
           </StackLayout>
-          <StackLayout Grid.Row="2"
+          <StackLayout Grid.Row="1"
                        Margin="10"
                        Padding="2"
+                       Spacing="5"
                        Orientation="Horizontal">
             <Label Text="{x:Static root:AppResources.HidePasswordLabelText}"
                    HorizontalOptions="End"
@@ -69,17 +51,18 @@
                     HorizontalOptions="Start"
                     VerticalOptions="CenterAndExpand" />
           </StackLayout>
-          <StackLayout Orientation="Horizontal"
-                       Margin="10"
-                       Padding="2"
-                       Grid.Row="3">
-            <Button Text="{x:Static root:AppResources.LogInButtonText}"
-                    Command="{Binding LogInCommand, Source={x:Reference view}}" />
-            <Button Text="{x:Static root:AppResources.CancelButtonText}"
-                    Command="{Binding CancelCommand, Source={x:Reference view}}" />
-          </StackLayout>
         </Grid>
-      </Frame>
-    </Frame>
-  </ContentView.Content>
-</ContentView>
+  </ui:ModalPanelView.BodyContent>
+  <ui:ModalPanelView.FooterContent>
+    <StackLayout Grid.Row="2"
+                 Margin="10"
+                 Padding="2"
+                 Spacing="5"
+                 Orientation="Horizontal">
+      <Button Text="{x:Static root:AppResources.LogInButtonText}"
+              Command="{Binding LogInCommand, Source={x:Reference view}}" />
+      <Button Text="{x:Static root:AppResources.CancelButtonText}"
+              Command="{Binding CancelCommand, Source={x:Reference view}}" />
+    </StackLayout>
+  </ui:ModalPanelView.FooterContent>
+</ui:ModalPanelView>

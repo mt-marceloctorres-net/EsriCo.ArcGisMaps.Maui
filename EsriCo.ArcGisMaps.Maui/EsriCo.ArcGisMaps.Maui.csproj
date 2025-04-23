@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0-android;net8.0-maccatalyst;net8.0-ios</TargetFrameworks>
+		<TargetFrameworks>net8.0-ios;net8.0-maccatalyst;net8.0-android34.0</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
 		<UseMaui>true</UseMaui>
@@ -11,79 +12,148 @@
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">33.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">34.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackAsTool>False</PackAsTool>
+		<Platforms>AnyCPU;x64</Platforms>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
-	  <ApplicationDisplayVersion>1.0.0.1</ApplicationDisplayVersion>
-	  <ApplicationVersion>2</ApplicationVersion>
-	  <ApplicationId>co.esri.argis.maps.maui</ApplicationId>
-	  <AndroidKeyStore>False</AndroidKeyStore>
+	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|x64'">
+	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|AnyCPU'">
-	  <ApplicationDisplayVersion>1.0.0.1</ApplicationDisplayVersion>
-	  <ApplicationVersion>2</ApplicationVersion>
-	  <ApplicationId>co.esri.argis.maps.maui</ApplicationId>
+	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-ios|x64'">
+	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-maccatalyst|AnyCPU'">
-	  <ApplicationDisplayVersion>1.0.0.1</ApplicationDisplayVersion>
-	  <ApplicationVersion>2</ApplicationVersion>
-	  <ApplicationId>co.esri.argis.maps.maui</ApplicationId>
+	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-maccatalyst|x64'">
+	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationDisplayVersion>1.0.0.1</ApplicationDisplayVersion>
-	  <ApplicationVersion>2</ApplicationVersion>
-	  <ApplicationId>co.esri.argis.maps.maui</ApplicationId>
+	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|x64'">
+	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
-	  <ApplicationDisplayVersion>1.0.0.1</ApplicationDisplayVersion>
-	  <ApplicationVersion>2</ApplicationVersion>
-	  <ApplicationId>co.esri.argis.maps.maui</ApplicationId>
-	  <AndroidPackageFormat>apk</AndroidPackageFormat>
-	  <AndroidKeyStore>False</AndroidKeyStore>
+	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|x64'">
+	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|AnyCPU'">
-	  <ApplicationDisplayVersion>1.0.0.1</ApplicationDisplayVersion>
-	  <ApplicationVersion>2</ApplicationVersion>
-	  <ApplicationId>co.esri.argis.maps.maui</ApplicationId>
+	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-ios|x64'">
+	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-maccatalyst|AnyCPU'">
-	  <ApplicationDisplayVersion>1.0.0.1</ApplicationDisplayVersion>
-	  <ApplicationVersion>2</ApplicationVersion>
-	  <ApplicationId>co.esri.argis.maps.maui</ApplicationId>
+	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-maccatalyst|x64'">
+	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationDisplayVersion>1.0.0.1</ApplicationDisplayVersion>
-	  <ApplicationVersion>2</ApplicationVersion>
-	  <ApplicationId>co.esri.argis.maps.maui</ApplicationId>
+	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
-	<PropertyGroup>
-	  <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
-	  <AssemblyVersion>1.0.0.1</AssemblyVersion>
-	  <FileVersion>1.0.0.1</FileVersion>
-	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-	  <IncludeSymbols>False</IncludeSymbols>
-	  <Version>1.0.0.1</Version>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|x64'">
+	  <ApplicationDisplayVersion>1.0.0.0</ApplicationDisplayVersion>
+	  <ApplicationVersion>1</ApplicationVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Docfx.App" Version="2.76.0" />
+	  <None Remove="Icons\ic_area.png" />
+	  <None Remove="Icons\ic_cancel.png" />
+	  <None Remove="Icons\ic_checked.png" />
+	  <None Remove="Icons\ic_close.png" />
+	  <None Remove="Icons\ic_close_dark.png" />
+	  <None Remove="Icons\ic_complete.png" />
+	  <None Remove="Icons\ic_coord.png" />
+	  <None Remove="Icons\ic_distance.png" />
+	  <None Remove="Icons\ic_erase.png" />
+	  <None Remove="Icons\ic_freehandline.png" />
+	  <None Remove="Icons\ic_home.png" />
+	  <None Remove="Icons\ic_key.png" />
+	  <None Remove="Icons\ic_minus.png" />
+	  <None Remove="Icons\ic_plus.png" />
+	  <None Remove="Icons\Ic_point.png" />
+	  <None Remove="Icons\ic_polygon.png" />
+	  <None Remove="Icons\ic_polyline.png" />
+	  <None Remove="Icons\ic_rectangle.png" />
+	  <None Remove="Icons\ic_redo.png" />
+	  <None Remove="Icons\ic_text.png" />
+	  <None Remove="Icons\ic_undo.png" />
+	  <None Remove="Icons\ic_user.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Icons\ic_area.png" />
+	  <EmbeddedResource Include="Icons\ic_cancel.png" />
+	  <EmbeddedResource Include="Icons\ic_checked.png" />
+	  <EmbeddedResource Include="Icons\ic_close.png" />
+	  <EmbeddedResource Include="Icons\ic_complete.png" />
+	  <EmbeddedResource Include="Icons\ic_coord.png" />
+	  <EmbeddedResource Include="Icons\ic_distance.png" />
+	  <EmbeddedResource Include="Icons\ic_erase.png" />
+	  <EmbeddedResource Include="Icons\ic_freehandline.png" />
+	  <EmbeddedResource Include="Icons\ic_home.png" />
+	  <EmbeddedResource Include="Icons\ic_key.png" />
+	  <EmbeddedResource Include="Icons\ic_minus.png" />
+	  <EmbeddedResource Include="Icons\ic_plus.png" />
+	  <EmbeddedResource Include="Icons\Ic_point.png" />
+	  <EmbeddedResource Include="Icons\ic_polygon.png" />
+	  <EmbeddedResource Include="Icons\ic_polyline.png" />
+	  <EmbeddedResource Include="Icons\ic_rectangle.png" />
+	  <EmbeddedResource Include="Icons\ic_redo.png" />
+	  <EmbeddedResource Include="Icons\ic_text.png" />
+	  <EmbeddedResource Include="Icons\ic_undo.png" />
+	  <EmbeddedResource Include="Icons\ic_user.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Esri.ArcGISRuntime.Maui" Version="200.4.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.60" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.60" />
 		<PackageReference Include="Microsoft.Maui.Essentials" Version="8.0.60" />
@@ -100,24 +170,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Properties\Resources.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>Resources.resx</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <EmbeddedResource Update="AppResources.es.resx">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="AppResources.resx">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Properties\Resources.resx">
-	    <Generator>ResXFileCodeGenerator</Generator>
-	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
+	  <EmbeddedResource Include="Icons\ic_close_dark.png" />
 	</ItemGroup>
 
 	<ItemGroup>

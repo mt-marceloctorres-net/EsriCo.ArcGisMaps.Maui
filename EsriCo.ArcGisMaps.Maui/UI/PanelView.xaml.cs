@@ -11,11 +11,28 @@ namespace EsriCo.ArcGisMaps.Maui.UI
   [XamlCompilation(XamlCompilationOptions.Compile)]
   public partial class PanelView : ContentView
   {
-
     /// <summary>
     /// 
     /// </summary>
     public event EventHandler Closed;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static readonly BindableProperty IsModalProperty = BindableProperty.Create(
+      nameof(IsModal),
+      typeof(bool),
+      typeof(PanelView),
+      defaultValue: false);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool IsModal
+    {
+      get => (bool)GetValue(IsModalProperty);
+      set => SetValue(IsModalProperty, value);
+    }
 
     /// <summary>
     /// 
@@ -25,7 +42,7 @@ namespace EsriCo.ArcGisMaps.Maui.UI
       typeof(bool),
       typeof(PanelView),
       propertyChanged: OnIsManagedPropertyChanged,
-      defaultValue: false);
+      defaultValue: true);
 
     /// <summary>
     /// 
@@ -70,8 +87,8 @@ namespace EsriCo.ArcGisMaps.Maui.UI
     {
       if(newValue == null && bindable is PanelView panelView)
       {
-        panelView.CloseButtonImage = ImageSource.FromStream(() =>
-          typeof(PanelView).Assembly.GetStreamEmbeddedResource(@"ic_close"));
+        var resourceId = GetCloseButtonImage();
+        panelView.CloseButtonImage = ImageSource.FromStream(() => typeof(PanelView).Assembly.GetStreamEmbeddedResource(resourceId));
       }
     }
 
@@ -141,7 +158,7 @@ namespace EsriCo.ArcGisMaps.Maui.UI
       nameof(BorderThickness),
       typeof(Thickness),
       typeof(PanelView),
-      defaultValue: new Thickness(1, 1, 1, 1));
+      defaultValue: new Thickness(5));
 
     /// <summary>
     /// 
@@ -198,7 +215,7 @@ namespace EsriCo.ArcGisMaps.Maui.UI
       nameof(IsHeaderVisible),
       typeof(bool),
       typeof(PanelView),
-      defaultValue: false);
+      defaultValue: true);
 
     /// <summary>
     /// 
@@ -216,7 +233,7 @@ namespace EsriCo.ArcGisMaps.Maui.UI
       nameof(IsFooterVisible),
       typeof(bool),
       typeof(PanelView),
-      defaultValue: false);
+      defaultValue: true);
 
     /// <summary>
     /// 
@@ -320,7 +337,8 @@ namespace EsriCo.ArcGisMaps.Maui.UI
     public static readonly BindableProperty TitleBackgroundColorProperty = BindableProperty.Create(
       nameof(TitleBackgroundColor),
       typeof(Color),
-      typeof(PanelView));
+      typeof(PanelView),
+      defaultValue: Colors.Transparent);
 
     /// <summary>
     /// 
@@ -423,7 +441,8 @@ namespace EsriCo.ArcGisMaps.Maui.UI
     public static readonly BindableProperty BodyBackgroundColorProperty = BindableProperty.Create(
       nameof(BodyBackgroundColor),
       typeof(Color),
-      typeof(PanelView));
+      typeof(PanelView),
+      defaultValue: Colors.Transparent);
 
     /// <summary>
     /// 
@@ -440,7 +459,8 @@ namespace EsriCo.ArcGisMaps.Maui.UI
     public static readonly BindableProperty StatusBackgroundColorProperty = BindableProperty.Create(
       nameof(StatusBackgroundColor),
       typeof(Color),
-      typeof(PanelView));
+      typeof(PanelView),
+      defaultValue: Colors.Transparent);
 
     /// <summary>
     /// 
@@ -523,10 +543,33 @@ namespace EsriCo.ArcGisMaps.Maui.UI
     /// <summary>
     /// 
     /// </summary>
+    /// <returns></returns>
+    private static string GetCloseButtonImage() => Application.Current is not null && Application.Current.PlatformAppTheme is AppTheme.Dark ?
+         @"ic_close_dark" :
+         @"ic_close";
+
+    /// <summary>
+    /// 
+    /// </summary>
     public PanelView()
     {
       InitializeComponent();
-      CloseButtonImage = ImageSource.FromStream(() => typeof(PanelView).Assembly.GetStreamEmbeddedResource(@"ic_close"));
+#if DEBUG
+      var externalPanelFrameColor = ExternalPanelFrame.BackgroundColor;
+      var panelFrameColor = PanelFrame.BackgroundColor;
+      var titleFrameColor = TitleBarFrame.BackgroundColor;
+      var bodyFrameColor = BodyFrame.BackgroundColor;
+      var statusFrameColor = StatusBarFrame.BackgroundColor;
+
+      Debug.WriteLine($"External: {externalPanelFrameColor}");
+      Debug.WriteLine($"Panel   : {panelFrameColor}");
+      Debug.WriteLine($"Title   : {titleFrameColor}");
+      Debug.WriteLine($"Body    : {bodyFrameColor}");
+      Debug.WriteLine($"External: {statusFrameColor}");
+#endif 
+
+      var resourceId = GetCloseButtonImage();
+      CloseButtonImage = ImageSource.FromStream(() => typeof(PanelView).Assembly.GetStreamEmbeddedResource(resourceId));
       EventAggregator.Current.GetEvent<PanelViewIsVisibleChangedEvent>().Subscribe(panelView =>
       {
         if(!ReferenceEquals(this, panelView) && IsManaged && IsVisible && panelView.IsVisible)
@@ -535,14 +578,6 @@ namespace EsriCo.ArcGisMaps.Maui.UI
         }
       });
       Closed += (sender, args) => EventAggregator.Current.GetEvent<PanelViewIsVisibleChangedEvent>().Publish(this);
-
-#if DEBUG
-      Debug.WriteLine(ExternalPanelFrame.BackgroundColor);
-      Debug.WriteLine(ExternalPanelFrame.BorderColor);
-      Debug.WriteLine(PanelFrame.BackgroundColor);
-      Debug.WriteLine(PanelFrame.BorderColor);
-#endif
-
     }
 
     /// <summary>
@@ -580,23 +615,33 @@ namespace EsriCo.ArcGisMaps.Maui.UI
           case GestureStatus.Started:
             break;
           case GestureStatus.Running:
-            TranslationX = bounds.X;
+            Debug.WriteLine($"{bounds.X};{x + e.TotalX + bounds.X}>=0;{x + e.TotalX + bounds.X + bounds.Width}<={parentBounds.Width};{x + e.TotalX};{parentBounds.Width - bounds.Width - bounds.X}");
             if(x + e.TotalX + bounds.X >= 0)
             {
               TranslationX = x + e.TotalX + bounds.X + bounds.Width <= parentBounds.Width ?
                x + e.TotalX :
                parentBounds.Width - bounds.Width - bounds.X;
             }
-            TranslationY = bounds.Y;
+            else
+            {
+              TranslationX = -bounds.X;
+            }
+            Debug.WriteLine($"TranslationX={TranslationX}");
+
+            Debug.WriteLine($"{bounds.Y};{y + e.TotalY + bounds.Y}>=0;{y + e.TotalY + bounds.Y + bounds.Height}<={parentBounds.Height};{y + e.TotalY};{parentBounds.Height - bounds.Height - bounds.Y}");
             if(y + e.TotalY + bounds.Y >= 0)
             {
               TranslationY = y + e.TotalY + bounds.Y + bounds.Height <= parentBounds.Height ?
                 y + e.TotalY :
                 parentBounds.Height - bounds.Height - bounds.Y;
             }
+            else
+            {
+              TranslationY = -bounds.Y;
+            }
+            Debug.WriteLine($"TranslationY={TranslationY}");
 #if DEBUG
-            Debug.WriteLine($"X={bounds.X}, Y={bounds.Y} R:Top=({bounds.Left}, {bounds.Top}, {bounds.Right}, {bounds.Bottom})");
-            Console.WriteLine($"X={bounds.X}, Y={bounds.Y} R:Top=({bounds.Left}, {bounds.Top}, {bounds.Right}, {bounds.Bottom})");
+            Debug.WriteLine($"X={bounds.X};Y={bounds.Y};R:(Left={bounds.Left};Top={bounds.Top};Right={bounds.Right};Bottonm={bounds.Bottom})");
 #endif
             break;
           case GestureStatus.Completed:

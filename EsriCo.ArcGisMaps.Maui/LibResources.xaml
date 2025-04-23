@@ -3,38 +3,51 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     xmlns:ui="clr-namespace:EsriCo.ArcGisMaps.Maui.UI"
                     x:Class="EsriCo.ArcGisMaps.Maui.LibResources">
-  <Color x:Key="DarkGrayTransparent">
-    <x:Arguments>
-      <x:Byte>204</x:Byte>
-      <x:Byte>204</x:Byte>
-      <x:Byte>204</x:Byte>
-      <x:Byte>127</x:Byte>
-    </x:Arguments>
-  </Color>
-  <Color x:Key="LightPrimaryColor">White</Color>
-  <Color x:Key="LightSecondaryColor">Black</Color>
-  <Color x:Key="DarkPrimaryColor">White</Color>
-  <Color x:Key="DarkSecondaryColor">Black</Color>
+  <Color x:Key="DarkGrayTransparent0">#7FCCCCCC</Color>
+  <Color x:Key="DarkGrayTransparent">#7FFF0000</Color>
+  <Color x:Key="Gray100">#E1E1E1</Color>
+  <Color x:Key="Gray200">#C8C8C8</Color>
+  <Color x:Key="Gray300">#ACACAC</Color>
+  <Color x:Key="Gray400">#919191</Color>
+  <Color x:Key="Gray500">#6E6E6E</Color>
+  <Color x:Key="Gray600">#404040</Color>
+  <Color x:Key="Gray900">#212121</Color>
+  <Color x:Key="Gray950">#141414</Color>
+  
+  <Color x:Key="PanelViewBorder">#212121</Color>
+  <Color x:Key="DarkPanelViewBorder">#E1E1E1</Color>
+  
+  <Color x:Key="FrameBackground">#E1E1E1</Color>
+  <Color x:Key="DarkFrameBackground">#212121</Color>
+  
+  <OnPlatform x:Key="CloseToolButtonImageSource"
+              x:TypeArguments="FileImageSource">
+    <On Platform="iOS"
+        Value="ic_close" />
+    <On Platform="Android"
+        Value="@drawable/ic_minus" />
+    <On Platform="UWP"
+        Value="Icons\ic_minus.png" />
+  </OnPlatform>
+  
   <Style TargetType="Frame">
+    <Setter Property="CornerRadius"
+            Value="0" />
     <Setter Property="BackgroundColor"
-            Value="{AppThemeBinding {StaticResource LightPrimaryColor},Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" />
-    <Setter Property="BorderColor"
-            Value="{AppThemeBinding {StaticResource LightSecondaryColor},Light={StaticResource LightSecondaryColor}, Dark={StaticResource DarkSecondaryColor}}" />
+            Value="Transparent"/>
+  </Style>
+  <Style TargetType="ActivityIndicator">
+    <Setter Property="Color"
+            Value="{AppThemeBinding Light={StaticResource PanelViewBorder}, Dark={StaticResource DarkPanelViewBorder}}" />
   </Style>
   <Style x:Key="PanelViewStyle"
          TargetType="ui:PanelView">
-    <Setter Property="TitleBackgroundColor"
-            Value="{AppThemeBinding {StaticResource LightPrimaryColor},Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" />
     <Setter Property="TitleBorderColor"
-            Value="{AppThemeBinding {StaticResource LightSecondaryColor},Light={StaticResource LightSecondaryColor}, Dark={StaticResource DarkSecondaryColor}}" />
-    <Setter Property="BodyBackgroundColor"
-            Value="{AppThemeBinding {StaticResource LightPrimaryColor},Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" />
+            Value="{AppThemeBinding Light={StaticResource PanelViewBorder}, Dark={StaticResource DarkPanelViewBorder}}" />
     <Setter Property="BodyBorderColor"
-            Value="{AppThemeBinding {StaticResource LightSecondaryColor},Light={StaticResource LightSecondaryColor}, Dark={StaticResource DarkSecondaryColor}}" />
-    <Setter Property="StatusBackgroundColor"
-            Value="{AppThemeBinding {StaticResource LightPrimaryColor},Light={StaticResource LightPrimaryColor}, Dark={StaticResource DarkPrimaryColor}}" />
+            Value="{AppThemeBinding Light={StaticResource PanelViewBorder}, Dark={StaticResource DarkPanelViewBorder}}" />
     <Setter Property="StatusBorderColor"
-            Value="{AppThemeBinding {StaticResource LightSecondaryColor},Light={StaticResource LightSecondaryColor}, Dark={StaticResource DarkSecondaryColor}}" />
+            Value="{AppThemeBinding Light={StaticResource PanelViewBorder}, Dark={StaticResource DarkPanelViewBorder}}" />
   </Style>
   <Style x:Key="SmallLabel"
          TargetType="Label">
@@ -120,11 +133,11 @@
       <Setter.Value>
         <OnPlatform x:TypeArguments="x:Double">
           <On Platform="iOS"
-              Value="32" />
+              Value="24" />
           <On Platform="Android"
-              Value="32" />
-          <On Platform="UWP"
-              Value="32" />
+              Value="24" />
+          <On Platform="WinUI"
+              Value="24" />
         </OnPlatform>
       </Setter.Value>
     </Setter>
@@ -132,15 +145,23 @@
       <Setter.Value>
         <OnPlatform x:TypeArguments="x:Double">
           <On Platform="iOS"
-              Value="32" />
+              Value="24" />
           <On Platform="Android"
-              Value="32" />
-          <On Platform="UWP"
-              Value="32" />
+              Value="24" />
+          <On Platform="WinUI"
+              Value="24" />
         </OnPlatform>
       </Setter.Value>
     </Setter>
   </Style>
+  <Style x:Key="PanelViewCloseToolButton"
+         BasedOn="{StaticResource TitleBarToolButton}"
+         TargetType="Button">
+    <Setter Property="ImageSource"
+            Value="{StaticResource CloseToolButtonImageSource}">
+    </Setter>
+  </Style>
+  
   <Style x:Key="ToolButton"
          TargetType="Button">
     <Setter Property="ContentLayout"
@@ -166,8 +187,8 @@
               Value="35" />
           <On Platform="Android"
               Value="35" />
-          <On Platform="UWP"
-              Value="38" />
+          <On Platform="WinUI"
+              Value="35" />
         </OnPlatform>
       </Setter.Value>
     </Setter>
@@ -178,8 +199,8 @@
               Value="35" />
           <On Platform="Android"
               Value="35" />
-          <On Platform="UWP"
-              Value="38" />
+          <On Platform="WinUI"
+              Value="35" />
         </OnPlatform>
       </Setter.Value>
     </Setter>

@@ -40,8 +40,10 @@ namespace EsriCo.ArcGisMaps.Maui.UI
       {
         BackgroundColor = backColor,
         Padding = 0,
-        HorizontalOptions = LayoutOptions.Fill,
-        VerticalOptions = LayoutOptions.Fill
+        Margin = 0,
+        HorizontalOptions = new LayoutOptions(LayoutAlignment.Fill, true),
+        VerticalOptions = new LayoutOptions(LayoutAlignment.Fill, true),
+        ZIndex = -1
       };
     }
 
@@ -70,10 +72,12 @@ namespace EsriCo.ArcGisMaps.Maui.UI
     /// </summary>
     private void InsertModalFrame()
     {
-      if(Parent is Layout layout && !layout.Children.Contains(ModalFrame))
+      if(Parent is Layout layout && ModalFrame is not null && !layout.Contains(ModalFrame))
       {
-        var index = layout.Children.IndexOf(this);
-        layout.Children.Insert(index - 1, ModalFrame);
+        ZIndex = 1000;
+        layout.Remove(this);
+        layout.Add(ModalFrame);
+        layout.Add(this);
       }
     }
 

@@ -1,8 +1,6 @@
 ﻿using Esri.ArcGISRuntime.Maui;
 using Esri.ArcGISRuntime.UI;
 
-using Drawing = System.Drawing;
-
 namespace EsriCo.ArcGisMaps.Maui.UI
 {
   /// <summary>
@@ -16,9 +14,9 @@ namespace EsriCo.ArcGisMaps.Maui.UI
     /// </summary>
     public static readonly BindableProperty IndicatorColorProperty = BindableProperty.Create(
       nameof(IndicatorColorProperty),
-      typeof(Drawing.Color),
+      typeof(Color),
       typeof(DrawingStatusView),
-      defaultValue: Drawing.Color.Black,
+      defaultValue: Colors.Black,
       propertyChanged: OnIndicatorColorPropertyChanged);
 
     /// <summary>
@@ -29,7 +27,7 @@ namespace EsriCo.ArcGisMaps.Maui.UI
     /// <param name="newValue"></param>
     private static void OnIndicatorColorPropertyChanged(BindableObject bindable, object oldValue, object newValue)
     {
-      var newColor = (Drawing.Color)newValue;
+      var newColor = (Color)newValue;
       if(bindable is DrawingStatusView contentView)
       {
         contentView.IndicatorColor = newColor;
@@ -39,9 +37,9 @@ namespace EsriCo.ArcGisMaps.Maui.UI
     /// <summary>
     /// 
     /// </summary>
-    public Drawing.Color IndicatorColor
+    public Color IndicatorColor
     {
-      get => (Drawing.Color)GetValue(IndicatorColorProperty);
+      get => (Color)GetValue(IndicatorColorProperty);
       set
       {
         SetValue(IndicatorColorProperty, value);
@@ -112,7 +110,7 @@ namespace EsriCo.ArcGisMaps.Maui.UI
     {
       InitializeComponent();
       IsVisible = false;
-      IndicatorColor = (Drawing.Color)ActivityIndicator.ColorProperty.DefaultValue;
+      IndicatorColor = (Color)ActivityIndicator.ColorProperty.DefaultValue;
     }
   }
 }
